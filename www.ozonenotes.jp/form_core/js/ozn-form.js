@@ -1,6 +1,23 @@
 jQuery(function ($) {
   var inputed = false;
 
+  const LIST_LABEL = {
+    title: 'お問い合わせ種別',
+    customer_name: 'お名前',
+    customer_kana: 'フリガナ',
+    pref: '都道府県',
+    address: '番地まで',
+    tel: '電話番号',
+    email: 'メールアドレス',
+    mail_body: 'お問い合わせ内容',
+    survey: '当社を何で知りましたか',
+  };
+  const REGEX = {
+    email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    katakana: /[ァ-ンｧ-ﾝﾞﾟ]$/,
+    phone: /^\d{2,3}-\d{3,4}-\d{3,4}$|^\d{10,11}$/,
+  };
+
   // ページ離脱時にアラートを表示する
   function showUnloadMessage() {
     return OznForm.unload_message;
@@ -484,39 +501,92 @@ jQuery(function ($) {
       post_data.mobile_warning = form_config.mobile_mail_warning;
     }
 
-    $.ajax({
-      type: 'post',
-      url: OznForm.vurl,
-      data: post_data,
-      timeout: 10000,
-    })
-      .done(function (data) {
-        clearInvalidMessages(form_name);
+    clearInvalidMessages(form_name);
 
-        var response = $.parseJSON(data);
+    var response = checkValidate(post_data);
 
-        // 検証OKのときの処理
-        if (response.valid) {
-          if (response.warning) {
-            setWarningMark($form_el, response.warning, form_config);
-          } else {
-            setVaildMark($form_el);
-          }
+    // 検証OKのときの処理
+    if (response.valid) {
+      if (response.warning) {
+        setWarningMark($form_el, response.warning, form_config);
+      } else {
+        setVaildMark($form_el);
+      }
 
-          dInner.resolveWith(true);
+      dInner.resolveWith(true);
 
-          // 検証NGのときの処理
-        } else {
-          setInvalidMark($form_el, response.errors[form_name], form_config);
-          dInner.resolveWith(false);
-        }
-      })
-
-      .fail(function () {
-        dInner.reject();
-      });
+      // 検証NGのときの処理
+    } else {
+      setInvalidMark($form_el, response.errors[form_name], form_config);
+      dInner.resolveWith(false);
+    }
 
     return dInner.promise();
+  }
+
+  function checkValidate(post_data) {
+    console.log(post_data);
+    const name = post_data.name;
+    const value = post_data.values[name];
+    const elmLabelError = LIST_LABEL[name];
+    const validateJSON = {
+      valid: true,
+      warning: null,
+      errors: {},
+    };
+
+    for (const valid of post_data.validate) {
+      // check null
+      if (valid == 'required' && !value) {
+        validateJSON.valid = false;
+        validateJSON.errors[name] = [`${elmLabelError}を入力してください`];
+        break;
+      }
+
+      // check email
+      if (valid == 'email_detail' && value) {
+        if (!REGEX.email.test(String(value).toLowerCase())) {
+          validateJSON.valid = false;
+          validateJSON.errors[name] = [
+            `${elmLabelError}に「@」マークが含まれていません`,
+            `${elmLabelError}の形式が誤っています`,
+          ];
+          break;
+        }
+      }
+
+      // check katakana
+      if (valid == 'kanaOnly' && value) {
+        if (!REGEX.katakana.test(value)) {
+          validateJSON.valid = false;
+          validateJSON.errors[name] = [
+            `${elmLabelError}は「ひらがな」か「カタカナ」で入力してください`,
+          ];
+          break;
+        }
+      }
+
+      // phone number
+      if (valid == 'tel' && value) {
+        if (!REGEX.phone.test(value)) {
+          validateJSON.valid = false;
+          validateJSON.errors[name] = [
+            `${elmLabelError}は市外局番を含む数字またはハイフンの組み合わせで入力してください`,
+          ];
+          break;
+        }
+      }
+
+      // survey
+      if (valid == 'survey' && value) {
+        if (value.length == 0) {
+          validateJSON.valid = false;
+          validateJSON.errors[name] = [`${elmLabelError}を入力してください`];
+          break;
+        }
+      }
+    }
+    return validateJSON;
   }
 
   /**
@@ -694,7 +764,7 @@ jQuery(function ($) {
         $form.hasClass('ozn-form-valid') ||
         $form.closest('.ozn-check').hasClass('ozn-form-valid')
       ) {
-        $this.hide();
+        // $this.hide();
       }
     });
   }

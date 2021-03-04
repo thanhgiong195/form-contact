@@ -28,75 +28,82 @@
       OznForm.vsetting = { show_icon: true, shift_scroll_position: -50 };
       OznForm.forms = {
         title: {
-          label: '\u3054\u5e0c\u671b\u306e\u5c0e\u5165\u65b9\u6cd5',
+          label: 'お問い合わせ種別',
           validates: ['required'],
           error_message_position: '.title-error',
           error_message_template: '<p><% messages %><\/p>',
           error_messages: {
-            required:
-              '\u3044\u305a\u308c\u304b1\u3064\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002',
+            required: 'いずれか1つを選択してください。',
           },
           validate_condition: [],
         },
-        corporate_name: {
-          label: '\u4f01\u696d\u540d\u30fb\u56e3\u4f53\u540d',
-          error_messages: [],
-          validate_condition: [],
-        },
-        corporate_kana: {
-          label:
-            '\u4f01\u696d\u540d\u30fb\u56e3\u4f53\u540d\u30d5\u30ea\u30ac\u30ca',
-          validates: ['kanaOnly'],
-          error_messages: [],
-          validate_condition: [],
-        },
         customer_name: {
-          label: '\u3054\u62c5\u5f53\u8005\u69d8\u6c0f\u540d',
+          label: 'お名前',
           validates: ['required'],
           error_messages: [],
           validate_condition: [],
         },
         customer_kana: {
-          label: '\u3054\u62c5\u5f53\u8005\u69d8\u30d5\u30ea\u30ac\u30ca',
+          label: 'フリガナ',
           validates: ['required', 'kanaOnly'],
           error_messages: [],
           validate_condition: [],
         },
+        zip_code: {
+          label: '郵便番号',
+          validates: ['zip_code'],
+          error_messages: [],
+          validate_condition: [],
+        },
+        pref: {
+          label: '都道府県',
+          validates: ['required'],
+          error_messages: [],
+          validate_condition: [],
+        },
+        address: {
+          label: '番地まで',
+          validates: ['required'],
+          error_messages: [],
+          validate_condition: [],
+        },
+        tel: {
+          label: '電話番号',
+          validates: ['required', 'tel'],
+          error_messages: [],
+          validate_condition: [],
+        },
         email: {
-          label: '\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9',
+          label: 'お問い合わせ詳細',
           validates: ['required', 'email_detail'],
           mobile_mail_warning:
-            '\u643a\u5e2f\u96fb\u8a71\u306e\u30a2\u30c9\u30ec\u30b9\u304c\u5165\u529b\u3055\u308c\u307e\u3057\u305f\u3002ozonenotes.jp \u30c9\u30e1\u30a4\u30f3\u304b\u3089\u306e\u30e1\u30fc\u30eb\u3092\u53d7\u4fe1\u3067\u304d\u308b\u3088\u3046\u306b\u8a2d\u5b9a\u304a\u9858\u3044\u3057\u307e\u3059\u3002',
+            '携帯電話のアドレスが入力されました。ozonenotes.jp ドメインからのメールを受信できるように設定お願いします。',
           error_messages: [],
           validate_condition: [],
         },
         mail_body: {
-          label: '\u304a\u554f\u3044\u5408\u308f\u305b\u5185\u5bb9',
+          label: 'お問い合わせ内容',
+          validates: ['required'],
           error_messages: [],
           validate_condition: [],
         },
-        privacy: {
-          label: '\u500b\u4eba\u60c5\u5831\u306e\u53d6\u308a\u6271\u3044',
-          validates: ['required'],
-          error_message_position: '.privacy-error',
-          error_message_template: '<p><% messages %><\/p>',
-          error_messages: {
-            required:
-              '\u304a\u554f\u3044\u5408\u308f\u305b\u306b\u3042\u305f\u3063\u3066\u306f\u3001\u500b\u4eba\u60c5\u5831\u306e\u53d6\u308a\u6271\u3044\u3078\u306e\u540c\u610f\u3092\u304a\u9858\u3044\u3057\u307e\u3059\u3002',
-          },
+        survey: {
+          label: '当社を何で知りましたか',
+          validates: ['survey'],
+          error_messages: [],
           validate_condition: [],
         },
       };
-      OznForm.reCAPTCHA = true;
-      OznForm.reCAPTCHA_sitekey = '6Leu6LIUAAAAAGom3z6WjRiPcBVoYU6ZylRGUQFf';
+      OznForm.reCAPTCHA = false;
+      // OznForm.reCAPTCHA_sitekey = '6Leu6LIUAAAAAGom3z6WjRiPcBVoYU6ZylRGUQFf';
       OznForm.init_msg = [];
       OznForm.unload_message =
-        '\u3053\u306e\u30da\u30fc\u30b8\u304b\u3089\u79fb\u52d5\u3057\u3066\u3088\u308d\u3057\u3044\u3067\u3059\u304b\uff1f\n\u5165\u529b\u5185\u5bb9\u306f\u4fdd\u5b58\u3055\u308c\u3066\u3044\u306a\u3044\u53ef\u80fd\u6027\u304c\u3042\u308a\u307e\u3059\u3002';
+        'このページから移動してよろしいですか？入力内容は保存されていない可能性があります。';
     </script>
     <script src="../form_core/js/ajaxzip3.js"></script>
     <script src="../form_core/js/jquery-ui.min.js"></script>
     <script src="../form_core/js/datepicker-ja.js"></script>
-    <script src="../../www.google.com/recaptcha/api9216.js?render=6Leu6LIUAAAAAGom3z6WjRiPcBVoYU6ZylRGUQFf"></script>
+    <!-- <script src="../../www.google.com/recaptcha/api9216.js?render=6Leu6LIUAAAAAGom3z6WjRiPcBVoYU6ZylRGUQFf"></script> -->
     <script src="../form_core/js/jquery.autoKana.js"></script>
     <script src="../form_core/js/domain_suggest.js"></script>
     <script src="../form_core/js/utilities.js"></script>
@@ -281,7 +288,6 @@
                 <div class="ozn-form-suggest-wrapper">
                   <input
                     data-domain-suggest="true"
-                    type="email"
                     name="email"
                     style="ime-mode: inactive"
                     class="ozn-input"
@@ -350,7 +356,7 @@
                 ></textarea>
               </div>
             </div>
-            <div class="tr" data-oznform-area="survey[]">
+            <div class="tr" data-oznform-area="survey">
               <div class="th">
                 当社を何で知りましたか
                 <span class="ozn-label required">必須</span>
@@ -358,18 +364,18 @@
               <div class="td">
                 <div class="ozn-check horizontal">
                   <label>
-                    <input type="checkbox" name="survey[]" value="ウェブ検索" />
+                    <input type="checkbox" name="survey" value="ウェブ検索" />
                     ウェブ検索
                   </label>
                   <label>
-                    <input type="checkbox" name="survey[]" value="チラシ" />
+                    <input type="checkbox" name="survey" value="チラシ" />
                     チラシ
                   </label>
                   <label>
-                    <input type="checkbox" name="survey[]" value="看板" /> 看板
+                    <input type="checkbox" name="survey" value="看板" /> 看板
                   </label>
                   <label>
-                    <input type="checkbox" name="survey[]" value="その他" />
+                    <input type="checkbox" name="survey" value="その他" />
                     その他
                   </label>
                 </div>
@@ -390,13 +396,5 @@
         </form>
       </div>
     </div>
-
-    <footer class="site-footer">
-      <div class="container">
-        <p class="site-copyright">
-          &copy;2011-2017 ozone notes. All Rights Reserved.
-        </p>
-      </div>
-    </footer>
   </body>
 </html>
