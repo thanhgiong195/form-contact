@@ -1,240 +1,392 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<!DOCTYPE html>
+<html>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <head>
+    <title>Form contact</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="./js/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/jquery.fileupload.css" />
+    <link rel="stylesheet" href="./css/ozn-form.min.css" />
+    <link rel="stylesheet" href="./css/style.min.css" />
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <script type="application/javascript">
+      OznForm = {};
+      OznForm.page_role = 'form';
+      OznForm.page_data = [];
+      OznForm.vurl =
+        'https://www.ozonenotes.jp/form_core/ozn-form-validation.php';
+      OznForm.furl = 'https://www.ozonenotes.jp/form_core/upload/index.php';
+      OznForm.vsetting = { show_icon: true, shift_scroll_position: -50 };
+      OznForm.forms = {
+        title: {
+          label: 'お問い合わせ種別',
+          validates: ['required'],
+          error_message_position: '.title-error',
+          error_message_template: '<p><% messages %><\/p>',
+          error_messages: {
+            required: 'いずれか1つを選択してください。',
+          },
+          validate_condition: [],
+        },
+        customer_name: {
+          label: 'お名前',
+          validates: ['required'],
+          error_messages: [],
+          validate_condition: [],
+        },
+        customer_kana: {
+          label: 'フリガナ',
+          validates: ['required', 'kanaOnly'],
+          error_messages: [],
+          validate_condition: [],
+        },
+        zip_code: {
+          label: '郵便番号',
+          validates: ['zip_code'],
+          error_messages: [],
+          validate_condition: [],
+        },
+        pref: {
+          label: '都道府県',
+          validates: ['required'],
+          error_messages: [],
+          validate_condition: [],
+        },
+        address: {
+          label: '番地まで',
+          validates: ['required'],
+          error_messages: [],
+          validate_condition: [],
+        },
+        tel: {
+          label: '電話番号',
+          validates: ['required', 'tel'],
+          error_messages: [],
+          validate_condition: [],
+        },
+        email: {
+          label: 'お問い合わせ詳細',
+          validates: ['required', 'email_detail'],
+          mobile_mail_warning:
+            '携帯電話のアドレスが入力されました。ozonenotes.jp ドメインからのメールを受信できるように設定お願いします。',
+          error_messages: [],
+          validate_condition: [],
+        },
+        mail_body: {
+          label: 'お問い合わせ内容',
+          validates: ['required'],
+          error_messages: [],
+          validate_condition: [],
+        },
+        survey: {
+          label: '当社を何で知りましたか',
+          validates: ['survey'],
+          error_messages: [],
+          validate_condition: [],
+        },
+      };
+      OznForm.reCAPTCHA = false;
+      // OznForm.reCAPTCHA_sitekey = '6Leu6LIUAAAAAGom3z6WjRiPcBVoYU6ZylRGUQFf';
+      OznForm.init_msg = [];
+      OznForm.unload_message =
+        'このページから移動してよろしいですか？入力内容は保存されていない可能性があります。';
+    </script>
+    <script src="./js/ajaxzip3.js"></script>
+    <script src="./js/jquery-ui.min.js"></script>
+    <script src="./js/datepicker-ja.js"></script>
+    <script src="./js/jquery.autoKana.js"></script>
+    <script src="./js/domain_suggest.js"></script>
+    <script src="./js/utilities.js"></script>
+    <script src="./js/ozn-form.js"></script>
+  </head>
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="description"
-		content="HTTrack is an easy-to-use website mirror utility. It allows you to download a World Wide website from the Internet to a local directory,building recursively all structures, getting html, images, and other files from the server to your computer. Links are rebuiltrelatively so that you can freely browse to the local site (works with any browser). You can mirror several sites together so that you can jump from one toanother. You can, also, update an existing mirror site, or resume an interrupted download. The robot is fully configurable, with an integrated help" />
-	<meta name="keywords"
-		content="httrack, HTTRACK, HTTrack, winhttrack, WINHTTRACK, WinHTTrack, offline browser, web mirror utility, aspirateur web, surf offline, web capture, www mirror utility, browse offline, local  site builder, website mirroring, aspirateur www, internet grabber, capture de site web, internet tool, hors connexion, unix, dos, windows 95, windows 98, solaris, ibm580, AIX 4.0, HTS, HTGet, web aspirator, web aspirateur, libre, GPL, GNU, free software" />
-	<title>Local index - HTTrack Website Copier</title>
-	<!-- Mirror and index made by HTTrack Website Copier/3.49-2 [XR&CO'2014] -->
-	<style type="text/css">
-		<!--
-		body {
-			margin: 0;
-			padding: 0;
-			margin-bottom: 15px;
-			margin-top: 8px;
-			background: #77b;
-		}
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>導入についてのお問い合わせ</h1>
+      </div>
 
-		body,
-		td {
-			font: 14px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-		}
+      <div class="ozn-form-stepbar-wrapper">
+        <ol class="ozn-form-stepbar step3 sp-hide">
+          <li class="current">1. 内容の入力</li>
+          <li>2. 内容確認</li>
+          <li>3. 送信完了</li>
+        </ol>
+        <ol class="ozn-form-stepbar step3 tb-hide pc-hide">
+          <li class="current">入力</li>
+          <li>確認</li>
+          <li>完了</li>
+        </ol>
+        <p>
+          本フォームから送信した段階では購入は確定いたしません。送信後、担当者からのご連絡をお待ちください。<br />
+          導入予定のサーバの動作状況をお知りになりたい方もこちらからご連絡ください。
+        </p>
+      </div>
 
-		#subTitle {
-			background: #000;
-			color: #fff;
-			padding: 4px;
-			font-weight: bold;
-		}
+      <div class="ozn-form-container">
+        <form action="#" method="post">
+          <div class="ozn-form-inner">
+            <div class="tr" data-oznform-area="title">
+              <div class="th">
+                お問い合わせ種別 <span class="ozn-label required">必須</span>
+              </div>
+              <div class="td">
+                <div class="ozn-check vertical">
+                  <label>
+                    <input type="radio" name="title" value="見積りのご依頼" />
+                    見積りのご依頼
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="title"
+                      value="商品に関するお問い合わせ"
+                    />
+                    商品に関するお問い合わせ
+                  </label>
+                  <label>
+                    <input type="radio" name="title" value="求人へのご応募" />
+                    求人へのご応募
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="title"
+                      value="その他のお問い合わせ"
+                    />
+                    その他のお問い合わせ
+                  </label>
+                </div>
+                <div class="title-error"></div>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="customer_name">
+              <div class="th">
+                お名前 <span class="ozn-label required">必須</span>
+              </div>
+              <div class="td">
+                <input
+                  type="text"
+                  name="customer_name"
+                  class="ozn-input"
+                  id="customer_name"
+                  data-autoruby="customer_name"
+                  placeholder="例）山田 太郎"
+                  autocomplete="name"
+                />
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="customer_kana">
+              <div class="th">
+                フリガナ <span class="ozn-label required">必須</span>
+              </div>
+              <div class="td">
+                <input
+                  type="text"
+                  name="customer_kana"
+                  class="ozn-input"
+                  id="customer_kana"
+                  data-autoruby-katakana="customer_name"
+                  placeholder="例）ヤマダ タロウ"
+                  autocomplete=""
+                />
+              </div>
+            </div>
+            <div class="tr">
+              <div class="th">ご住所</div>
+              <div class="td">
+                <dl>
+                  <dt>郵便番号 <span class="ozn-label optional">任意</span></dt>
+                  <dd>
+                    <input
+                      type="text"
+                      name="zip-code"
+                      class="ozn-input pc-30 tb-50"
+                      style="ime-mode: inactive"
+                      placeholder="例）432-3332"
+                      data-oznform-zip="address"
+                      autocomplete="postal-code"
+                    />
+                    <p class="ozn-notice">
+                      郵便番号を入力すると住所を自動で表示します
+                    </p>
+                  </dd>
+                </dl>
+                <dl>
+                  <dt>都道府県 <span class="ozn-label required">必須</span></dt>
+                  <dd>
+                    <input
+                      name="pref"
+                      class="ozn-input pc-30 tb-50"
+                      placeholder="例）愛知県"
+                      data-oznform-pref="address"
+                      autocomplete="address-level1"
+                    />
+                  </dd>
+                </dl>
+                <dl>
+                  <dt>番地まで <span class="ozn-label required">必須</span></dt>
+                  <dd>
+                    <input
+                      type="text"
+                      name="address"
+                      class="ozn-input"
+                      data-oznform-address="address"
+                      placeholder="例）名古屋市中村区＊＊町3丁目11-1"
+                      autocomplete="street-address"
+                    />
+                  </dd>
+                </dl>
+                <dl>
+                  <dt>建物名等 <span class="ozn-label optional">任意</span></dt>
+                  <dd>
+                    <input
+                      type="text"
+                      name="address-building"
+                      class="ozn-input"
+                      placeholder="例）＊＊ビル 201号室"
+                      autocomplete="address-level4"
+                    />
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="tel">
+              <div class="th">
+                電話番号 <span class="ozn-label required">必須</span>
+              </div>
+              <div class="td">
+                <input
+                  type="tel"
+                  name="tel"
+                  class="ozn-input"
+                  style="ime-mode: inactive"
+                  placeholder="例）000-111-2222"
+                  autocomplete="tel-national"
+                />
+                <p class="ozn-notice">
+                  日中にご連絡の取りやすい番号をご記入ください。
+                </p>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="email">
+              <div class="th">
+                メールアドレス <span class="ozn-label required">必須</span>
+              </div>
+              <div class="td">
+                <div class="ozn-form-suggest-wrapper">
+                  <input
+                    data-domain-suggest="true"
+                    name="email"
+                    style="ime-mode: inactive"
+                    class="ozn-input"
+                    placeholder="例）yamada@example.com"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="materials">
+              <div class="th">
+                興味のある商品 <span class="ozn-label optional">任意</span>
+              </div>
+              <div class="td">
+                <select name="materials" class="ozn-input pc-50 tb-50">
+                  <option value="">お選びください</option>
+                  <optgroup label="お菓子">
+                    <option value="ケーキ">ケーキ</option>
+                    <option value="クッキー">クッキー</option>
+                    <option value="チョコレート">チョコレート</option>
+                  </optgroup>
+                  <optgroup label="ドリンク">
+                    <option value="コーヒー">コーヒー</option>
+                    <option value="紅茶">紅茶</option>
+                    <option value="オレンジジュース">オレンジジュース</option>
+                  </optgroup>
+                  <option value="その他">その他</option>
+                </select>
+                <p>以下は「その他」を選んだ方のみ必須</p>
+                <dl>
+                  <dt>その他の商品名</dt>
+                  <dd>
+                    <input
+                      type="text"
+                      name="materials-etc"
+                      class="ozn-input"
+                      placeholder="例）マカロン"
+                    />
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="shipping-date">
+              <div class="th">
+                ご希望納期 <span class="ozn-label optional">任意</span>
+              </div>
+              <div class="td">
+                <input
+                  type="text"
+                  name="shipping-date"
+                  class="ozn-input pc-50 tb-50"
+                  data-of_datepicker="true"
+                  placeholder="例）2017年10月10日"
+                /><br class="visible-xs-inline" />までに必要
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="mail_body">
+              <div class="th">
+                お問い合わせ内容 <span class="ozn-label required">必須</span>
+              </div>
+              <div class="td">
+                <textarea
+                  name="mail_body"
+                  rows="10"
+                  class="ozn-input"
+                  placeholder="例）＊＊＊＊製品の見積希望"
+                ></textarea>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="survey">
+              <div class="th">
+                当社を何で知りましたか
+                <span class="ozn-label required">必須</span>
+              </div>
+              <div class="td">
+                <div class="ozn-check horizontal">
+                  <label>
+                    <input type="checkbox" name="survey" value="ウェブ検索" />
+                    ウェブ検索
+                  </label>
+                  <label>
+                    <input type="checkbox" name="survey" value="チラシ" />
+                    チラシ
+                  </label>
+                  <label>
+                    <input type="checkbox" name="survey" value="看板" /> 看板
+                  </label>
+                  <label>
+                    <input type="checkbox" name="survey" value="その他" />
+                    その他
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
 
-		#siteNavigation a,
-		#siteNavigation .current {
-			font-weight: bold;
-			color: #448;
-		}
-
-		#siteNavigation a:link {
-			text-decoration: none;
-		}
-
-		#siteNavigation a:visited {
-			text-decoration: none;
-		}
-
-		#siteNavigation .current {
-			background-color: #ccd;
-		}
-
-		#siteNavigation a:hover {
-			text-decoration: none;
-			background-color: #fff;
-			color: #000;
-		}
-
-		#siteNavigation a:active {
-			text-decoration: none;
-			background-color: #ccc;
-		}
-
-
-		a:link {
-			text-decoration: underline;
-			color: #00f;
-		}
-
-		a:visited {
-			text-decoration: underline;
-			color: #000;
-		}
-
-		a:hover {
-			text-decoration: underline;
-			color: #c00;
-		}
-
-		a:active {
-			text-decoration: underline;
-		}
-
-		#pageContent {
-			clear: both;
-			border-bottom: 6px solid #000;
-			padding: 10px;
-			padding-top: 20px;
-			line-height: 1.65em;
-			background-repeat: no-repeat;
-			background-position: top right;
-		}
-
-		#pageContent,
-		#siteNavigation {
-			background-color: #ccd;
-		}
-
-
-		.imgLeft {
-			float: left;
-			margin-right: 10px;
-			margin-bottom: 10px;
-		}
-
-		.imgRight {
-			float: right;
-			margin-left: 10px;
-			margin-bottom: 10px;
-		}
-
-		hr {
-			height: 1px;
-			color: #000;
-			background-color: #000;
-			margin-bottom: 15px;
-		}
-
-		h1 {
-			margin: 0;
-			font-weight: bold;
-			font-size: 2em;
-		}
-
-		h2 {
-			margin: 0;
-			font-weight: bold;
-			font-size: 1.6em;
-		}
-
-		h3 {
-			margin: 0;
-			font-weight: bold;
-			font-size: 1.3em;
-		}
-
-		h4 {
-			margin: 0;
-			font-weight: bold;
-			font-size: 1.18em;
-		}
-
-		.blak {
-			background-color: #000;
-		}
-
-		.hide {
-			display: none;
-		}
-
-		.tableWidth {
-			min-width: 400px;
-		}
-
-		.tblRegular {
-			border-collapse: collapse;
-		}
-
-		.tblRegular td {
-			padding: 6px;
-			border: 2px solid #99c;
-		}
-
-		.tblHeaderColor,
-		.tblHeaderColor td {
-			background: #99c;
-		}
-
-		.tblNoBorder td {
-			border: 0;
-		}
-
-
-		// 
-		-->
-	</style>
-
-</head>
-
-<table width="76%" border="0" align="center" cellspacing="0" cellpadding="3" class="tableWidth">
-	<tr>
-		<td id="subTitle">HTTrack Website Copier - Open Source offline browser</td>
-	</tr>
-</table>
-<table width="76%" border="0" align="center" cellspacing="0" cellpadding="0" class="tableWidth">
-	<tr class="blak">
-		<td>
-			<table width="100%" border="0" align="center" cellspacing="1" cellpadding="0">
-				<tr>
-					<td colspan="6">
-						<table width="100%" border="0" align="center" cellspacing="0" cellpadding="10">
-							<tr>
-								<td id="pageContent">
-									<!-- ==================== End prologue ==================== -->
-
-									<meta name="generator" content="HTTrack Website Copier/3.x">
-									<TITLE>Local index - HTTrack</TITLE>
-									</HEAD>
-
-									<BODY>
-										<H1 ALIGN=Center>Index of locally available sites:</H1>
-										<TABLE BORDER="0" WIDTH="100%" CELLSPACING="1" CELLPADDING="0">
-											<TR>
-												<TD BACKGROUND="fade.gif">
-													&middot;
-													<A HREF="www.ozonenotes.jp/order-form/index.html">
-														ozn-form 導入についてのお問い合わせ - STEP01
-													</A>
-												</TD>
-											</TR>
-										</TABLE>
-										<BR>
-										<BR>
-										<BR>
-										<H6 ALIGN="RIGHT">
-											<I>Mirror and index made by HTTrack Website Copier [XR&amp;CO'2008]</I>
-										</H6>
-										<!-- Mirror and index made by HTTrack Website Copier/3.49-2 [XR&CO'2014] -->
-										<!-- Thanks for using HTTrack Website Copier! -->
-										<meta HTTP-EQUIV="Refresh" CONTENT="0; URL=www.ozonenotes.jp/order-form/index.html">
-
-
-										<!-- ==================== Start epilogue ==================== -->
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
-
-<table width="76%" border="0" align="center" valign="bottom" cellspacing="0" cellpadding="0">
-	<tr>
-		<td id="footer"><small>&copy; 2008 Xavier Roche & other contributors - Web Design: Leto Kauler.</small></td>
-	</tr>
-</table>
-
-</body>
-
+          <div class="ozn-form-buttons">
+            <button type="submit" class="ozn-btn ozn-form-nav submit">
+              入力内容の確認へ進む →
+            </button>
+          </div>
+          <input
+            type="hidden"
+            name="_token"
+            value="2a5c741655277eae111fda7963e103d5bf70e7cf062d3c00"
+          />
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

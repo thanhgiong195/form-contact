@@ -525,7 +525,6 @@ jQuery(function ($) {
   }
 
   function checkValidate(post_data) {
-    console.log(post_data);
     const name = post_data.name;
     const value = post_data.values[name];
     const elmLabelError = LIST_LABEL[name];
