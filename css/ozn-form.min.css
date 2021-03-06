@@ -117,6 +117,9 @@
   .ozn-form-inner .th {
     display: table-cell;
   }
+  .ozn-form-inner .th {
+    width: 300px;
+  }
 }
 .ozn-form-inner dl dt {
   padding: 8px 0;

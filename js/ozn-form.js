@@ -324,6 +324,9 @@ jQuery(function ($) {
   }
 
   // 送信時の入力値検証
+  $('#SubmitForm').click(function () {
+    alert('Sending data....');
+  });
   $('form').submit(validateAllForms);
 
   /**
@@ -333,6 +336,7 @@ jQuery(function ($) {
    */
   function validateAllForms() {
     var $this = $(this);
+    const DataForm = $('form').serializeArray();
     var ajax_validations = [];
 
     $.each(Object.keys(OznForm.forms), function () {
@@ -360,26 +364,13 @@ jQuery(function ($) {
     if (ajax_validations.length === 0) {
       // -- 全て検証OKの時の処理
 
-      if (OznForm.reCAPTCHA) {
-        grecaptcha.ready(function () {
-          grecaptcha
-            .execute(OznForm.reCAPTCHA_sitekey, { action: 'oznform' })
-            .then(function (token) {
-              $this.append(
-                '<input type="hidden" name="g-recaptcha-response" value="' +
-                  token +
-                  '">',
-              );
-
-              $this.off('submit', validateAllForms);
-              $(window).off('beforeunload', showUnloadMessage);
-              $this.submit();
-            });
-        });
-      } else {
-        $this.off('submit', validateAllForms);
-        $(window).off('beforeunload', showUnloadMessage);
-        $this.submit();
+      // submitFormAfterCheckValidate();
+      $('.form-input-data').hide();
+      $('.form-confirm').show();
+      $('.ozn-form-stepbar li').removeClass('current');
+      $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
+      for (const elm of DataForm) {
+        $(`#${elm.name}_value`).text(elm.value);
       }
     } else {
       // 可変数のDeferredを並列実行させる
@@ -405,27 +396,16 @@ jQuery(function ($) {
 
           if (is_success) {
             // -- 全て検証OKの時の処理
-            if (OznForm.reCAPTCHA) {
-              grecaptcha.ready(function () {
-                grecaptcha
-                  .execute(OznForm.reCAPTCHA_sitekey, { action: 'oznform' })
-                  .then(function (token) {
-                    $this.append(
-                      '<input type="hidden" name="g-recaptcha-response" value="' +
-                        token +
-                        '">',
-                    );
 
-                    $this.off('submit', validateAllForms);
-                    $(window).off('beforeunload', showUnloadMessage);
-                    $this.submit();
-                  });
-              });
-            } else {
-              $this.off('submit', validateAllForms);
-              $(window).off('beforeunload', showUnloadMessage);
-              $this.submit();
+            $('.form-input-data').hide();
+            $('.form-confirm').show();
+            $('.ozn-form-stepbar li').removeClass('current');
+            $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
+            for (const elm of DataForm) {
+              $(`#${elm.name}_value`).text(elm.value);
             }
+            return false;
+            // submitFormAfterCheckValidate();
           } else {
             // -- 検証NGの時の処理
 
@@ -454,6 +434,7 @@ jQuery(function ($) {
         })
         .fail(function () {
           alert('通信に失敗しました。');
+          return false;
         });
     }
 
@@ -588,6 +569,22 @@ jQuery(function ($) {
     return validateJSON;
   }
 
+  function submitFormAfterCheckValidate() {
+    $this.off('submit', validateAllForms);
+    $(window).off('beforeunload', showUnloadMessage);
+    $this.submit();
+  }
+
+  function showFormConfirm() {
+    $('.form-input-data').hide();
+    $('.form-confirm').show();
+    $('.ozn-form-stepbar li').removeClass('current');
+    $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
+    for (const elm of DataForm) {
+      $(`#${elm.name}_value`).text(elm.value);
+    }
+  }
+
   /**
    * 検証エラーメッセージ等を初期化
    */
@@ -602,7 +599,7 @@ jQuery(function ($) {
    */
   function setVaildMark($form_el) {
     addResultClass($form_el, true);
-    apendResultIcon($form_el, true);
+    appendResultIcon($form_el, true);
   }
 
   /**
@@ -613,8 +610,8 @@ jQuery(function ($) {
    */
   function setWarningMark($form_el, warning_message, form_config) {
     addResultClass($form_el, true);
-    apendErrorMessages($form_el, warning_message, form_config, true);
-    apendResultIcon($form_el, true);
+    appendErrorMessages($form_el, warning_message, form_config, true);
+    appendResultIcon($form_el, true);
   }
 
   /**
@@ -626,8 +623,8 @@ jQuery(function ($) {
    */
   function setInvalidMark($form_el, error_message, form_config) {
     addResultClass($form_el, false);
-    apendErrorMessages($form_el, error_message, form_config, false);
-    apendResultIcon($form_el, false);
+    appendErrorMessages($form_el, error_message, form_config, false);
+    appendResultIcon($form_el, false);
   }
 
   /**
@@ -664,7 +661,7 @@ jQuery(function ($) {
    * @param form_config <フォーム設定>
    * @param warning <注意メッセージとして表示フラグ>
    */
-  function apendErrorMessages($el, msg, form_config, warning) {
+  function appendErrorMessages($el, msg, form_config, warning) {
     var form_name = OznForm.utilities.getFormNameByElement($el);
     var template = $('<div>' + msg.join('<br />') + '</div>');
 
@@ -717,7 +714,7 @@ jQuery(function ($) {
    * @param {boolean} is_valid
    * @returns {number}
    */
-  function apendResultIcon($el, is_valid) {
+  function appendResultIcon($el, is_valid) {
     var form_name = OznForm.utilities.getFormNameByElement($el);
 
     // 既存アイコンを初期化

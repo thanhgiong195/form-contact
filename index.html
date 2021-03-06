@@ -96,9 +96,7 @@
     </script>
     <script src="./js/ajaxzip3.js"></script>
     <script src="./js/jquery-ui.min.js"></script>
-    <script src="./js/datepicker-ja.js"></script>
     <script src="./js/jquery.autoKana.js"></script>
-    <script src="./js/domain_suggest.js"></script>
     <script src="./js/utilities.js"></script>
     <script src="./js/ozn-form.js"></script>
   </head>
@@ -127,7 +125,7 @@
       </div>
 
       <div class="ozn-form-container">
-        <form action="#" method="post">
+        <form action="#" method="post" class="form-input-data">
           <div class="ozn-form-inner">
             <div class="tr" data-oznform-area="title">
               <div class="th">
@@ -202,8 +200,8 @@
                   <dt>郵便番号 <span class="ozn-label optional">任意</span></dt>
                   <dd>
                     <input
-                      type="text"
-                      name="zip-code"
+                      type="tel"
+                      name="zip_code"
                       class="ozn-input pc-30 tb-50"
                       style="ime-mode: inactive"
                       placeholder="例）432-3332"
@@ -245,7 +243,7 @@
                   <dd>
                     <input
                       type="text"
-                      name="address-building"
+                      name="address_building"
                       class="ozn-input"
                       placeholder="例）＊＊ビル 201号室"
                       autocomplete="address-level4"
@@ -279,60 +277,12 @@
               <div class="td">
                 <div class="ozn-form-suggest-wrapper">
                   <input
-                    data-domain-suggest="true"
                     name="email"
                     style="ime-mode: inactive"
                     class="ozn-input"
                     placeholder="例）yamada@example.com"
                   />
                 </div>
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="materials">
-              <div class="th">
-                興味のある商品 <span class="ozn-label optional">任意</span>
-              </div>
-              <div class="td">
-                <select name="materials" class="ozn-input pc-50 tb-50">
-                  <option value="">お選びください</option>
-                  <optgroup label="お菓子">
-                    <option value="ケーキ">ケーキ</option>
-                    <option value="クッキー">クッキー</option>
-                    <option value="チョコレート">チョコレート</option>
-                  </optgroup>
-                  <optgroup label="ドリンク">
-                    <option value="コーヒー">コーヒー</option>
-                    <option value="紅茶">紅茶</option>
-                    <option value="オレンジジュース">オレンジジュース</option>
-                  </optgroup>
-                  <option value="その他">その他</option>
-                </select>
-                <p>以下は「その他」を選んだ方のみ必須</p>
-                <dl>
-                  <dt>その他の商品名</dt>
-                  <dd>
-                    <input
-                      type="text"
-                      name="materials-etc"
-                      class="ozn-input"
-                      placeholder="例）マカロン"
-                    />
-                  </dd>
-                </dl>
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="shipping-date">
-              <div class="th">
-                ご希望納期 <span class="ozn-label optional">任意</span>
-              </div>
-              <div class="td">
-                <input
-                  type="text"
-                  name="shipping-date"
-                  class="ozn-input pc-50 tb-50"
-                  data-of_datepicker="true"
-                  placeholder="例）2017年10月10日"
-                /><br class="visible-xs-inline" />までに必要
               </div>
             </div>
             <div class="tr" data-oznform-area="mail_body">
@@ -377,15 +327,98 @@
 
           <div class="ozn-form-buttons">
             <button type="submit" class="ozn-btn ozn-form-nav submit">
-              入力内容の確認へ進む →
+              Confirm →
             </button>
           </div>
-          <input
-            type="hidden"
-            name="_token"
-            value="2a5c741655277eae111fda7963e103d5bf70e7cf062d3c00"
-          />
         </form>
+
+        <div class="form-confirm hide">
+          <div class="ozn-form-inner">
+            <div class="tr" data-oznform-area="title">
+              <div class="th">お問い合わせ種別</div>
+              <div class="td">
+                <p id="title_value"></p>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="customer_name">
+              <div class="th">お名前</div>
+              <div class="td">
+                <p id="customer_name_value"></p>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="customer_kana">
+              <div class="th">フリガナ</div>
+              <div class="td">
+                <p id="customer_kana_value"></p>
+              </div>
+            </div>
+            <div class="tr">
+              <div class="th">ご住所</div>
+              <div class="td">
+                <dl>
+                  <dt>郵便番号</dt>
+                  <dd>
+                    <p id="zip_code_value"></p>
+                  </dd>
+                </dl>
+                <dl>
+                  <dt>都道府県</dt>
+                  <dd>
+                    <p id="pref_value"></p>
+                  </dd>
+                </dl>
+                <dl>
+                  <dt>番地まで</dt>
+                  <dd>
+                    <p id="address_value"></p>
+                  </dd>
+                </dl>
+                <dl>
+                  <dt>建物名等</dt>
+                  <dd>
+                    <p id="address_building_value"></p>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="tel">
+              <div class="th">電話番号</div>
+              <div class="td">
+                <p id="tel_value"></p>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="email">
+              <div class="th">メールアドレス</div>
+              <div class="td">
+                <div class="ozn-form-suggest-wrapper">
+                  <p id="email_value"></p>
+                </div>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="mail_body">
+              <div class="th">お問い合わせ内容</div>
+              <div class="td">
+                <p id="mail_body_value"></p>
+              </div>
+            </div>
+            <div class="tr" data-oznform-area="survey">
+              <div class="th">当社を何で知りましたか</div>
+              <div class="td">
+                <p id="survey_value"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ozn-form-buttons">
+            <button
+              type="submit"
+              id="SubmitForm"
+              class="ozn-btn ozn-form-nav submit"
+            >
+              Submit →
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </body>
