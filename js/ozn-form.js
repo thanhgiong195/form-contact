@@ -369,9 +369,15 @@ jQuery(function ($) {
       $('.form-confirm').show();
       $('.ozn-form-stepbar li').removeClass('current');
       $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
+      let surveyData = '';
       for (const elm of DataForm) {
-        $(`#${elm.name}_value`).text(elm.value);
+        if (elm.name == 'survey') {
+          surveyData += elm.value + ', ';
+        } else {
+          $(`#${elm.name}_value`).text(elm.value);
+        }
       }
+      $(`#survey_value`).text(surveyData.slice(0, -2));
     } else {
       // 可変数のDeferredを並列実行させる
       $.when
@@ -401,9 +407,15 @@ jQuery(function ($) {
             $('.form-confirm').show();
             $('.ozn-form-stepbar li').removeClass('current');
             $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
+            let surveyData = '';
             for (const elm of DataForm) {
-              $(`#${elm.name}_value`).text(elm.value);
+              if (elm.name == 'survey') {
+                surveyData += elm.value + ', ';
+              } else {
+                $(`#${elm.name}_value`).text(elm.value);
+              }
             }
+            $(`#survey_value`).text(surveyData.slice(0, -2));
             return false;
             // submitFormAfterCheckValidate();
           } else {
@@ -580,9 +592,15 @@ jQuery(function ($) {
     $('.form-confirm').show();
     $('.ozn-form-stepbar li').removeClass('current');
     $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
+    let surveyData = '';
     for (const elm of DataForm) {
-      $(`#${elm.name}_value`).text(elm.value);
+      if (elm.name == 'survey') {
+        surveyData += elm.value + ', ';
+      } else {
+        $(`#${elm.name}_value`).text(elm.value);
+      }
     }
+    $(`#survey_value`).text(surveyData.slice(0, -2));
   }
 
   /**
