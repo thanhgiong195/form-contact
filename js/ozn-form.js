@@ -380,7 +380,9 @@ jQuery(function ($) {
           surveyData += elm.value + ', ';
         } else {
           $(`#${elm.name}_value`).text(
-            elm.name == 'zip_code' ? `〒${elm.value}` : elm.value,
+            elm.name == 'zip_code' && elm.value != ''
+              ? `〒${elm.value}`
+              : elm.value,
           );
         }
 
@@ -426,7 +428,9 @@ jQuery(function ($) {
                 surveyData += elm.value + ', ';
               } else {
                 $(`#${elm.name}_value`).text(
-                  elm.name == 'zip_code' ? `〒${elm.value}` : elm.value,
+                  elm.name == 'zip_code' && elm.value != ''
+                    ? `〒${elm.value}`
+                    : elm.value,
                 );
               }
 
@@ -619,7 +623,9 @@ jQuery(function ($) {
         surveyData += elm.value + ', ';
       } else {
         $(`#${elm.name}_value`).text(
-          elm.name == 'zip_code' ? `〒${elm.value}` : elm.value,
+          elm.name == 'zip_code' && elm.value != ''
+            ? `〒${elm.value}`
+            : elm.value,
         );
       }
 
