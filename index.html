@@ -335,60 +335,50 @@
         <div class="form-confirm hide">
           <div class="ozn-form-inner">
             <div class="tr" data-oznform-area="title">
-              <div class="th">お問い合わせ種別</div>
+              <div class="th">
+                お問い合わせ種別 <span class="ozn-label required">必須</span>
+              </div>
               <div class="td">
                 <p id="title_value"></p>
               </div>
             </div>
             <div class="tr" data-oznform-area="customer_name">
-              <div class="th">お名前</div>
+              <div class="th">
+                お名前 <span class="ozn-label required">必須</span>
+              </div>
               <div class="td">
                 <p id="customer_name_value"></p>
               </div>
             </div>
             <div class="tr" data-oznform-area="customer_kana">
-              <div class="th">フリガナ</div>
+              <div class="th">
+                フリガナ<span class="ozn-label required">必須</span>
+              </div>
               <div class="td">
                 <p id="customer_kana_value"></p>
               </div>
             </div>
             <div class="tr">
-              <div class="th">ご住所</div>
+              <div class="th">
+                ご住所<span class="ozn-label required">必須</span>
+              </div>
               <div class="td">
-                <dl>
-                  <dt>郵便番号</dt>
-                  <dd>
-                    <p id="zip_code_value"></p>
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>都道府県</dt>
-                  <dd>
-                    <p id="pref_value"></p>
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>番地まで</dt>
-                  <dd>
-                    <p id="address_value"></p>
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>建物名等</dt>
-                  <dd>
-                    <p id="address_building_value"></p>
-                  </dd>
-                </dl>
+                <p id="zip_code_value"></p>
+                <p id="address_value"></p>
               </div>
             </div>
             <div class="tr" data-oznform-area="tel">
-              <div class="th">電話番号</div>
+              <div class="th">
+                電話番号<span class="ozn-label required">必須</span>
+              </div>
               <div class="td">
                 <p id="tel_value"></p>
               </div>
             </div>
             <div class="tr" data-oznform-area="email">
-              <div class="th">メールアドレス</div>
+              <div class="th">
+                メールアドレス<span class="ozn-label required">必須</span>
+              </div>
               <div class="td">
                 <div class="ozn-form-suggest-wrapper">
                   <p id="email_value"></p>
@@ -396,13 +386,18 @@
               </div>
             </div>
             <div class="tr" data-oznform-area="mail_body">
-              <div class="th">お問い合わせ内容</div>
+              <div class="th">
+                お問い合わせ内容<span class="ozn-label required">必須</span>
+              </div>
               <div class="td">
                 <p id="mail_body_value"></p>
               </div>
             </div>
             <div class="tr" data-oznform-area="survey">
-              <div class="th">当社を何で知りましたか</div>
+              <div class="th">
+                当社を何で知りましたか
+                <span class="ozn-label required">必須</span>
+              </div>
               <div class="td">
                 <p id="survey_value"></p>
               </div>
@@ -411,11 +406,18 @@
 
           <div class="ozn-form-buttons">
             <button
+              type="button"
+              id="BackForm"
+              class="ozn-btn ozn-form-nav back"
+            >
+              ← 戻って書き直す
+            </button>
+            <button
               type="submit"
               id="SubmitForm"
               class="ozn-btn ozn-form-nav submit"
             >
-              Submit →
+              この内容で送信する →
             </button>
           </div>
         </div>

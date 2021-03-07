@@ -327,6 +327,10 @@ jQuery(function ($) {
   $('#SubmitForm').click(function () {
     alert('Sending data....');
   });
+  $('#BackForm').click(function () {
+    $('.form-input-data').show();
+    $('.form-confirm').hide();
+  });
   $('form').submit(validateAllForms);
 
   /**
@@ -370,13 +374,21 @@ jQuery(function ($) {
       $('.ozn-form-stepbar li').removeClass('current');
       $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
       let surveyData = '';
+      let addressValue = '';
       for (const elm of DataForm) {
         if (elm.name == 'survey') {
           surveyData += elm.value + ', ';
         } else {
-          $(`#${elm.name}_value`).text(elm.value);
+          $(`#${elm.name}_value`).text(
+            elm.name == 'zip_code' ? `〒${elm.value}` : elm.value,
+          );
+        }
+
+        if (['pref', 'address', 'address_building'].includes(elm.name)) {
+          addressValue += elm.value;
         }
       }
+      $(`#address_value`).text(addressValue);
       $(`#survey_value`).text(surveyData.slice(0, -2));
     } else {
       // 可変数のDeferredを並列実行させる
@@ -408,13 +420,21 @@ jQuery(function ($) {
             $('.ozn-form-stepbar li').removeClass('current');
             $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
             let surveyData = '';
+            let addressValue = '';
             for (const elm of DataForm) {
               if (elm.name == 'survey') {
                 surveyData += elm.value + ', ';
               } else {
-                $(`#${elm.name}_value`).text(elm.value);
+                $(`#${elm.name}_value`).text(
+                  elm.name == 'zip_code' ? `〒${elm.value}` : elm.value,
+                );
+              }
+
+              if (['pref', 'address', 'address_building'].includes(elm.name)) {
+                addressValue += elm.value;
               }
             }
+            $(`#address_value`).text(addressValue);
             $(`#survey_value`).text(surveyData.slice(0, -2));
             return false;
             // submitFormAfterCheckValidate();
@@ -593,13 +613,21 @@ jQuery(function ($) {
     $('.ozn-form-stepbar li').removeClass('current');
     $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
     let surveyData = '';
+    let addressValue = '';
     for (const elm of DataForm) {
       if (elm.name == 'survey') {
         surveyData += elm.value + ', ';
       } else {
-        $(`#${elm.name}_value`).text(elm.value);
+        $(`#${elm.name}_value`).text(
+          elm.name == 'zip_code' ? `〒${elm.value}` : elm.value,
+        );
+      }
+
+      if (['pref', 'address', 'address_building'].includes(elm.name)) {
+        addressValue += elm.value;
       }
     }
+    $(`#address_value`).text(addressValue);
     $(`#survey_value`).text(surveyData.slice(0, -2));
   }
 

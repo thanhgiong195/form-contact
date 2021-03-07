@@ -394,7 +394,7 @@ select.ozn-input {
     float: none;
   }
   .ozn-btn.back {
-    margin-top: 20px;
+    margin: 20px 0;
   }
   .ozn-form-confirm .ozn-btn.submit {
     margin-bottom: 30px;
