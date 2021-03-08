@@ -11,6 +11,7 @@ jQuery(function ($) {
     email: 'メールアドレス',
     mail_body: 'お問い合わせ内容',
     survey: '当社を何で知りましたか',
+    materials: '生徒の学年',
   };
   const REGEX = {
     email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -39,6 +40,14 @@ jQuery(function ($) {
       { form_name: form_name },
       validateForm,
     );
+  });
+
+  $('#SelectMaterials').on('change', function () {
+    if (this.value == 'その他') {
+      $('#MaterialsEtc').show();
+    } else {
+      $('#MaterialsEtc').hide();
+    }
   });
 
   // -- 設定に応じてオプション機能を追加
@@ -161,8 +170,8 @@ jQuery(function ($) {
       // サジェストリスト用の要素を用意
       $target.after(
         '<div id="' +
-          suggest_area_id +
-          '" class="ozn-form-suggest" style="display:none;"></div>',
+        suggest_area_id +
+        '" class="ozn-form-suggest" style="display:none;"></div>',
       );
 
       new Suggest.Local(
@@ -373,25 +382,20 @@ jQuery(function ($) {
       $('.form-confirm').show();
       $('.ozn-form-stepbar li').removeClass('current');
       $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
-      let surveyData = '';
+
       let addressValue = '';
       for (const elm of DataForm) {
-        if (elm.name == 'survey') {
-          surveyData += elm.value + ', ';
-        } else {
-          $(`#${elm.name}_value`).text(
-            elm.name == 'zip_code' && elm.value != ''
-              ? `〒${elm.value}`
-              : elm.value,
-          );
-        }
+        $(`#${elm.name}_value`).text(
+          elm.name == 'zip_code' && elm.value != ''
+            ? `〒${elm.value}`
+            : elm.value,
+        );
 
         if (['pref', 'address', 'address_building'].includes(elm.name)) {
           addressValue += elm.value;
         }
       }
       $(`#address_value`).text(addressValue);
-      $(`#survey_value`).text(surveyData.slice(0, -2));
     } else {
       // 可変数のDeferredを並列実行させる
       $.when
@@ -413,7 +417,6 @@ jQuery(function ($) {
               return false;
             }
           });
-
           if (is_success) {
             // -- 全て検証OKの時の処理
 
@@ -421,25 +424,20 @@ jQuery(function ($) {
             $('.form-confirm').show();
             $('.ozn-form-stepbar li').removeClass('current');
             $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
-            let surveyData = '';
             let addressValue = '';
             for (const elm of DataForm) {
-              if (elm.name == 'survey') {
-                surveyData += elm.value + ', ';
-              } else {
-                $(`#${elm.name}_value`).text(
-                  elm.name == 'zip_code' && elm.value != ''
-                    ? `〒${elm.value}`
-                    : elm.value,
-                );
-              }
+
+              $(`#${elm.name}_value`).text(
+                elm.name == 'zip_code' && elm.value != ''
+                  ? `〒${elm.value}`
+                  : elm.value,
+              );
 
               if (['pref', 'address', 'address_building'].includes(elm.name)) {
                 addressValue += elm.value;
               }
             }
             $(`#address_value`).text(addressValue);
-            $(`#survey_value`).text(surveyData.slice(0, -2));
             return false;
             // submitFormAfterCheckValidate();
           } else {
@@ -592,49 +590,8 @@ jQuery(function ($) {
           break;
         }
       }
-
-      // survey
-      if (valid == 'survey' && value) {
-        if (value.length == 0) {
-          validateJSON.valid = false;
-          validateJSON.errors[name] = [`${elmLabelError}を入力してください`];
-          break;
-        }
-      }
     }
     return validateJSON;
-  }
-
-  function submitFormAfterCheckValidate() {
-    $this.off('submit', validateAllForms);
-    $(window).off('beforeunload', showUnloadMessage);
-    $this.submit();
-  }
-
-  function showFormConfirm() {
-    $('.form-input-data').hide();
-    $('.form-confirm').show();
-    $('.ozn-form-stepbar li').removeClass('current');
-    $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
-    let surveyData = '';
-    let addressValue = '';
-    for (const elm of DataForm) {
-      if (elm.name == 'survey') {
-        surveyData += elm.value + ', ';
-      } else {
-        $(`#${elm.name}_value`).text(
-          elm.name == 'zip_code' && elm.value != ''
-            ? `〒${elm.value}`
-            : elm.value,
-        );
-      }
-
-      if (['pref', 'address', 'address_building'].includes(elm.name)) {
-        addressValue += elm.value;
-      }
-    }
-    $(`#address_value`).text(addressValue);
-    $(`#survey_value`).text(surveyData.slice(0, -2));
   }
 
   /**
@@ -787,14 +744,14 @@ jQuery(function ($) {
     if (is_valid) {
       $el.after(
         '<i class="' +
-          form_name.replace('[]', '') +
-          ' ozn-form-icon icon-ok"></i>',
+        form_name.replace('[]', '') +
+        ' ozn-form-icon icon-ok"></i>',
       );
     } else {
       $el.after(
         '<i class="' +
-          form_name.replace('[]', '') +
-          ' ozn-form-icon icon-caution"></i>',
+        form_name.replace('[]', '') +
+        ' ozn-form-icon icon-caution"></i>',
       );
     }
   }

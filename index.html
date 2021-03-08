@@ -1,427 +1,326 @@
 <!DOCTYPE html>
 <html>
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <head>
-    <title>Form contact</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="./favicon.png" />
-    <link rel="stylesheet" type="text/css" href="./js/jquery-ui.min.css" />
-    <link rel="stylesheet" type="text/css" href="./css/jquery.fileupload.css" />
-    <link rel="stylesheet" href="./css/ozn-form.min.css" />
-    <link rel="stylesheet" href="./css/style.min.css" />
-    <script src="./js/jquery-1.12.4.min.js"></script>
-    <script type="application/javascript">
-      OznForm = {};
-      OznForm.page_role = 'form';
-      OznForm.page_data = [];
-      OznForm.vurl =
-        'https://www.ozonenotes.jp/form_core/ozn-form-validation.php';
-      OznForm.furl = 'https://www.ozonenotes.jp/form_core/upload/index.php';
-      OznForm.vsetting = { show_icon: true, shift_scroll_position: -50 };
-      OznForm.forms = {
-        title: {
-          label: 'お問い合わせ種別',
-          validates: ['required'],
-          error_message_position: '.title-error',
-          error_message_template: '<p><% messages %><\/p>',
-          error_messages: {
-            required: 'いずれか1つを選択してください。',
-          },
-          validate_condition: [],
-        },
-        customer_name: {
-          label: 'お名前',
-          validates: ['required'],
-          error_messages: [],
-          validate_condition: [],
-        },
-        customer_kana: {
-          label: 'フリガナ',
-          validates: ['required', 'kanaOnly'],
-          error_messages: [],
-          validate_condition: [],
-        },
-        zip_code: {
-          label: '郵便番号',
-          validates: ['zip_code'],
-          error_messages: [],
-          validate_condition: [],
-        },
-        pref: {
-          label: '都道府県',
-          validates: ['required'],
-          error_messages: [],
-          validate_condition: [],
-        },
-        address: {
-          label: '番地まで',
-          validates: ['required'],
-          error_messages: [],
-          validate_condition: [],
-        },
-        tel: {
-          label: '電話番号',
-          validates: ['required', 'tel'],
-          error_messages: [],
-          validate_condition: [],
-        },
-        email: {
-          label: 'お問い合わせ詳細',
-          validates: ['required', 'email_detail'],
-          mobile_mail_warning:
-            '携帯電話のアドレスが入力されました。ozonenotes.jp ドメインからのメールを受信できるように設定お願いします。',
-          error_messages: [],
-          validate_condition: [],
-        },
-        mail_body: {
-          label: 'お問い合わせ内容',
-          validates: ['required'],
-          error_messages: [],
-          validate_condition: [],
-        },
-        survey: {
-          label: '当社を何で知りましたか',
-          validates: ['survey'],
-          error_messages: [],
-          validate_condition: [],
-        },
-      };
-      OznForm.reCAPTCHA = false;
-      // OznForm.reCAPTCHA_sitekey = '6Leu6LIUAAAAAGom3z6WjRiPcBVoYU6ZylRGUQFf';
-      OznForm.init_msg = [];
-      OznForm.unload_message =
-        'このページから移動してよろしいですか？入力内容は保存されていない可能性があります。';
-    </script>
-    <script src="./js/ajaxzip3.js"></script>
-    <script src="./js/jquery-ui.min.js"></script>
-    <script src="./js/jquery.autoKana.js"></script>
-    <script src="./js/utilities.js"></script>
-    <script src="./js/ozn-form.js"></script>
-  </head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <head>
+        <title>Form contact</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/png" href="./favicon.png" />
+        <link rel="stylesheet" type="text/css" href="./js/jquery-ui.min.css" />
+        <link rel="stylesheet" type="text/css" href="./css/jquery.fileupload.css" />
+        <link rel="stylesheet" href="./css/ozn-form.min.css" />
+        <link rel="stylesheet" href="./css/style.min.css" />
+        <script src="./js/jquery-1.12.4.min.js"></script>
+        <script type="application/javascript">
+            OznForm = {};
+            OznForm.page_role = 'form';
+            OznForm.page_data = [];
+            OznForm.vurl = 'https://www.ozonenotes.jp/form_core/ozn-form-validation.php';
+            OznForm.furl = 'https://www.ozonenotes.jp/form_core/upload/index.php';
+            OznForm.vsetting = { show_icon: true, shift_scroll_position: -50 };
+            OznForm.forms = {
+                customer_name: {
+                    label: 'お名前',
+                    validates: ['required'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                customer_kana: {
+                    label: 'フリガナ',
+                    validates: ['required', 'kanaOnly'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                zip_code: {
+                    label: '郵便番号',
+                    validates: ['zip_code'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                pref: {
+                    label: '都道府県',
+                    validates: ['required'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                address: {
+                    label: '番地まで',
+                    validates: ['required'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                tel: {
+                    label: '電話番号',
+                    validates: ['required', 'tel'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                email: {
+                    label: 'お問い合わせ詳細',
+                    validates: ['required', 'email_detail'],
+                    mobile_mail_warning:
+                        '携帯電話のアドレスが入力されました。ozonenotes.jp ドメインからのメールを受信できるように設定お願いします。',
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                materials: {
+                    label: '興味のある商品',
+                    validates: ['required'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+            };
+            OznForm.reCAPTCHA = false;
+            // OznForm.reCAPTCHA_sitekey = '6Leu6LIUAAAAAGom3z6WjRiPcBVoYU6ZylRGUQFf';
+            OznForm.init_msg = [];
+            OznForm.unload_message =
+                'このページから移動してよろしいですか？入力内容は保存されていない可能性があります。';
+        </script>
+        <script src="./js/ajaxzip3.js"></script>
+        <script src="./js/jquery-ui.min.js"></script>
+        <script src="./js/jquery.autoKana.js"></script>
+        <script src="./js/utilities.js"></script>
+        <script src="./js/ozn-form.js"></script>
+    </head>
 
-  <body>
-    <div class="container">
-      <div class="page-header">
-        <h1>導入についてのお問い合わせ</h1>
-      </div>
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <h1>お問い合わせフォーム入力</h1>
+            </div>
 
-      <div class="ozn-form-stepbar-wrapper">
-        <ol class="ozn-form-stepbar step3 sp-hide">
-          <li class="current">1. 内容の入力</li>
-          <li>2. 内容確認</li>
-          <li>3. 送信完了</li>
-        </ol>
-        <ol class="ozn-form-stepbar step3 tb-hide pc-hide">
-          <li class="current">入力</li>
-          <li>確認</li>
-          <li>完了</li>
-        </ol>
-        <p>
-          本フォームから送信した段階では購入は確定いたしません。送信後、担当者からのご連絡をお待ちください。<br />
-          導入予定のサーバの動作状況をお知りになりたい方もこちらからご連絡ください。
-        </p>
-      </div>
-
-      <div class="ozn-form-container">
-        <form action="#" method="post" class="form-input-data">
-          <div class="ozn-form-inner">
-            <div class="tr" data-oznform-area="title">
-              <div class="th">
-                お問い合わせ種別 <span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <div class="ozn-check vertical">
-                  <label>
-                    <input type="radio" name="title" value="見積りのご依頼" />
-                    見積りのご依頼
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="title"
-                      value="商品に関するお問い合わせ"
-                    />
-                    商品に関するお問い合わせ
-                  </label>
-                  <label>
-                    <input type="radio" name="title" value="求人へのご応募" />
-                    求人へのご応募
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="title"
-                      value="その他のお問い合わせ"
-                    />
-                    その他のお問い合わせ
-                  </label>
-                </div>
-                <div class="title-error"></div>
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="customer_name">
-              <div class="th">
-                お名前 <span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <input
-                  type="text"
-                  name="customer_name"
-                  class="ozn-input"
-                  id="customer_name"
-                  data-autoruby="customer_name"
-                  placeholder="例）山田 太郎"
-                  autocomplete="name"
-                />
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="customer_kana">
-              <div class="th">
-                フリガナ <span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <input
-                  type="text"
-                  name="customer_kana"
-                  class="ozn-input"
-                  id="customer_kana"
-                  data-autoruby-katakana="customer_name"
-                  placeholder="例）ヤマダ タロウ"
-                  autocomplete=""
-                />
-              </div>
-            </div>
-            <div class="tr">
-              <div class="th">ご住所</div>
-              <div class="td">
-                <dl>
-                  <dt>郵便番号 <span class="ozn-label optional">任意</span></dt>
-                  <dd>
-                    <input
-                      type="tel"
-                      name="zip_code"
-                      class="ozn-input pc-30 tb-50"
-                      style="ime-mode: inactive"
-                      placeholder="例）432-3332"
-                      data-oznform-zip="address"
-                      autocomplete="postal-code"
-                    />
-                    <p class="ozn-notice">
-                      郵便番号を入力すると住所を自動で表示します
-                    </p>
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>都道府県 <span class="ozn-label required">必須</span></dt>
-                  <dd>
-                    <input
-                      name="pref"
-                      class="ozn-input pc-30 tb-50"
-                      placeholder="例）愛知県"
-                      data-oznform-pref="address"
-                      autocomplete="address-level1"
-                    />
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>番地まで <span class="ozn-label required">必須</span></dt>
-                  <dd>
-                    <input
-                      type="text"
-                      name="address"
-                      class="ozn-input"
-                      data-oznform-address="address"
-                      placeholder="例）名古屋市中村区＊＊町3丁目11-1"
-                      autocomplete="street-address"
-                    />
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>建物名等 <span class="ozn-label optional">任意</span></dt>
-                  <dd>
-                    <input
-                      type="text"
-                      name="address_building"
-                      class="ozn-input"
-                      placeholder="例）＊＊ビル 201号室"
-                      autocomplete="address-level4"
-                    />
-                  </dd>
-                </dl>
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="tel">
-              <div class="th">
-                電話番号 <span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <input
-                  type="tel"
-                  name="tel"
-                  class="ozn-input"
-                  style="ime-mode: inactive"
-                  placeholder="例）000-111-2222"
-                  autocomplete="tel-national"
-                />
-                <p class="ozn-notice">
-                  日中にご連絡の取りやすい番号をご記入ください。
+            <div class="ozn-form-stepbar-wrapper">
+                <ol class="ozn-form-stepbar step3 sp-hide">
+                    <li class="current">1. 内容の入力</li>
+                    <li>2. 内容確認</li>
+                    <li>3. 送信完了</li>
+                </ol>
+                <ol class="ozn-form-stepbar step3 tb-hide pc-hide">
+                    <li class="current">入力</li>
+                    <li>確認</li>
+                    <li>完了</li>
+                </ol>
+                <p>
+                    お問い合わせいただきました後、折り返し、初回無料体験授業の空き枠をご連絡（または、お問い合わせ頂きました内容へのご返答）いたします。
                 </p>
-              </div>
             </div>
-            <div class="tr" data-oznform-area="email">
-              <div class="th">
-                メールアドレス <span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <div class="ozn-form-suggest-wrapper">
-                  <input
-                    name="email"
-                    style="ime-mode: inactive"
-                    class="ozn-input"
-                    placeholder="例）yamada@example.com"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="mail_body">
-              <div class="th">
-                お問い合わせ内容 <span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <textarea
-                  name="mail_body"
-                  rows="10"
-                  class="ozn-input"
-                  placeholder="例）＊＊＊＊製品の見積希望"
-                ></textarea>
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="survey">
-              <div class="th">
-                当社を何で知りましたか
-                <span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <div class="ozn-check horizontal">
-                  <label>
-                    <input type="checkbox" name="survey" value="ウェブ検索" />
-                    ウェブ検索
-                  </label>
-                  <label>
-                    <input type="checkbox" name="survey" value="チラシ" />
-                    チラシ
-                  </label>
-                  <label>
-                    <input type="checkbox" name="survey" value="看板" /> 看板
-                  </label>
-                  <label>
-                    <input type="checkbox" name="survey" value="その他" />
-                    その他
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="ozn-form-buttons">
-            <button type="submit" class="ozn-btn ozn-form-nav submit">
-              入力内容の確認へ進む →
-            </button>
-          </div>
-        </form>
+            <div class="ozn-form-container">
+                <form action="#" method="post" class="form-input-data">
+                    <div class="ozn-form-inner">
+                        <div class="tr" data-oznform-area="customer_name">
+                            <div class="th">お名前 <span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <input
+                                    type="text"
+                                    name="customer_name"
+                                    class="ozn-input"
+                                    id="customer_name"
+                                    data-autoruby="customer_name"
+                                    placeholder="例）山田 太郎"
+                                    autocomplete="name"
+                                />
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="customer_kana">
+                            <div class="th">フリガナ <span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <input
+                                    type="text"
+                                    name="customer_kana"
+                                    class="ozn-input"
+                                    id="customer_kana"
+                                    data-autoruby-katakana="customer_name"
+                                    placeholder="例）ヤマダ タロウ"
+                                    autocomplete=""
+                                />
+                            </div>
+                        </div>
+                        <div class="tr">
+                            <div class="th">ご住所</div>
+                            <div class="td">
+                                <dl>
+                                    <dt>郵便番号 <span class="ozn-label optional">任意</span></dt>
+                                    <dd>
+                                        <input
+                                            type="tel"
+                                            name="zip_code"
+                                            class="ozn-input pc-30 tb-50"
+                                            style="ime-mode: inactive"
+                                            placeholder="例）432-3332"
+                                            data-oznform-zip="address"
+                                            autocomplete="postal-code"
+                                        />
+                                        <p class="ozn-notice">郵便番号を入力すると住所を自動で表示します</p>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>都道府県 <span class="ozn-label required">必須</span></dt>
+                                    <dd>
+                                        <input
+                                            name="pref"
+                                            class="ozn-input pc-30 tb-50"
+                                            placeholder="例）愛知県"
+                                            data-oznform-pref="address"
+                                            autocomplete="address-level1"
+                                        />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>番地まで <span class="ozn-label required">必須</span></dt>
+                                    <dd>
+                                        <input
+                                            type="text"
+                                            name="address"
+                                            class="ozn-input"
+                                            data-oznform-address="address"
+                                            placeholder="例）名古屋市中村区＊＊町3丁目11-1"
+                                            autocomplete="street-address"
+                                        />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>建物名等 <span class="ozn-label optional">任意</span></dt>
+                                    <dd>
+                                        <input
+                                            type="text"
+                                            name="address_building"
+                                            class="ozn-input"
+                                            placeholder="例）＊＊ビル 201号室"
+                                            autocomplete="address-level4"
+                                        />
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="tel">
+                            <div class="th">電話番号 <span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <input
+                                    type="tel"
+                                    name="tel"
+                                    class="ozn-input"
+                                    style="ime-mode: inactive"
+                                    placeholder="例）000-111-2222"
+                                    autocomplete="tel-national"
+                                />
+                                <p class="ozn-notice">日中にご連絡の取りやすい番号をご記入ください。</p>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="email">
+                            <div class="th">メールアドレス <span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <input
+                                        name="email"
+                                        style="ime-mode: inactive"
+                                        class="ozn-input"
+                                        placeholder="例）yamada@example.com"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="materials">
+                            <div class="th">生徒の学年 <span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <select name="materials" class="ozn-input pc-50 tb-50" id="SelectMaterials">
+                                    <option value="">選択してください</option>
+                                    <option value="中学1年生">中学1年生</option>
+                                    <option value="中学2年生">中学2年生</option>
+                                    <option value="中学3年生">中学3年生</option>
+                                    <option value="高校1年生">高校1年生</option>
+                                    <option value="高校2年生">高校2年生</option>
+                                    <option value="高校3年生">高校3年生</option>
+                                    <option value="浪人生">浪人生</option>
+                                    <option value="その他">その他</option>
+                                </select>
+                                <div id="MaterialsEtc" class="hide">
+                                    <p>以下は「その他」を選んだ方のみ必須</p>
+                                    <dl>
+                                        <dt>その他の商品名</dt>
+                                        <dd>
+                                            <input
+                                                type="text"
+                                                name="materials-etc"
+                                                class="ozn-input"
+                                                placeholder="例）マカロン"
+                                            />
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="form-confirm hide">
-          <div class="ozn-form-inner">
-            <div class="tr" data-oznform-area="title">
-              <div class="th">
-                お問い合わせ種別 <span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <p id="title_value"></p>
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="customer_name">
-              <div class="th">
-                お名前 <span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <p id="customer_name_value"></p>
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="customer_kana">
-              <div class="th">
-                フリガナ<span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <p id="customer_kana_value"></p>
-              </div>
-            </div>
-            <div class="tr">
-              <div class="th">
-                ご住所<span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <p id="zip_code_value"></p>
-                <p id="address_value"></p>
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="tel">
-              <div class="th">
-                電話番号<span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <p id="tel_value"></p>
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="email">
-              <div class="th">
-                メールアドレス<span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <div class="ozn-form-suggest-wrapper">
-                  <p id="email_value"></p>
+                    <div class="privacy-wrapper">
+                        <h2>個人情報の取り扱いについて</h2>
+                        <div class="privacy-inner">
+                            <p>
+                                お子様の学年：高校2年生の娘です。英語レベル：今年3月に英検準2級を取得しました。重点的に学習したい点：文法。希望内容：難関大学受験に通用する英語力、スピーチ力を身に着けたく、体験授業を希望します。など必要な情報をお書き添え頂きますと、大変スムーズに初回無料レッスンにご案内させて頂けます。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="ozn-form-buttons">
+                        <button type="submit" class="ozn-btn ozn-form-nav submit">入力内容の確認へ進む →</button>
+                    </div>
+                </form>
+
+                <div class="form-confirm hide">
+                    <div class="ozn-form-inner">
+                        <div class="tr" data-oznform-area="customer_name">
+                            <div class="th">お名前 <span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <p id="customer_name_value"></p>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="customer_kana">
+                            <div class="th">フリガナ<span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <p id="customer_kana_value"></p>
+                            </div>
+                        </div>
+                        <div class="tr">
+                            <div class="th">ご住所<span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <p id="zip_code_value"></p>
+                                <p id="address_value"></p>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="tel">
+                            <div class="th">電話番号<span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <p id="tel_value"></p>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="email">
+                            <div class="th">メールアドレス<span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <p id="email_value"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="materials">
+                            <div class="th">生徒の学年<span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <p id="materials_value"></p>
+                                    <p id="materials-etc_value"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ozn-form-buttons">
+                        <button type="button" id="BackForm" class="ozn-btn ozn-form-nav back">← 戻って書き直す</button>
+                        <button type="submit" id="SubmitForm" class="ozn-btn ozn-form-nav submit">
+                            この内容で送信する →
+                        </button>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="tr" data-oznform-area="mail_body">
-              <div class="th">
-                お問い合わせ内容<span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <p id="mail_body_value"></p>
-              </div>
-            </div>
-            <div class="tr" data-oznform-area="survey">
-              <div class="th">
-                当社を何で知りましたか
-                <span class="ozn-label required">必須</span>
-              </div>
-              <div class="td">
-                <p id="survey_value"></p>
-              </div>
-            </div>
-          </div>
-
-          <div class="ozn-form-buttons">
-            <button
-              type="button"
-              id="BackForm"
-              class="ozn-btn ozn-form-nav back"
-            >
-              ← 戻って書き直す
-            </button>
-            <button
-              type="submit"
-              id="SubmitForm"
-              class="ozn-btn ozn-form-nav submit"
-            >
-              この内容で送信する →
-            </button>
-          </div>
         </div>
-      </div>
-    </div>
-  </body>
+    </body>
 </html>
