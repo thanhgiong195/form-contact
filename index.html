@@ -227,6 +227,36 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tr" data-oznform-area="materials">
+                            <div class="th">生徒の学年 <span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <select name="materials" class="ozn-input pc-50 tb-50" id="SelectMaterials">
+                                    <option value="">選択してください</option>
+                                    <option value="中学1年生">中学1年生</option>
+                                    <option value="中学2年生">中学2年生</option>
+                                    <option value="中学3年生">中学3年生</option>
+                                    <option value="高校1年生">高校1年生</option>
+                                    <option value="高校2年生">高校2年生</option>
+                                    <option value="高校3年生">高校3年生</option>
+                                    <option value="浪人生">浪人生</option>
+                                    <option value="その他">その他</option>
+                                </select>
+                                <div id="MaterialsEtc" class="hide">
+                                    <p>以下は「その他」を選んだ方のみ必須</p>
+                                    <dl>
+                                        <dt>その他の商品名</dt>
+                                        <dd>
+                                            <input
+                                                type="text"
+                                                name="materials-etc"
+                                                class="ozn-input"
+                                                placeholder="例）マカロン"
+                                            />
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
                         <div class="tr" data-oznform-area="mail_body">
                             <div class="th">お問い合わせ内容 <span class="ozn-label required">必須</span></div>
                             <div class="td">
@@ -261,36 +291,6 @@
                                     </p>
                                     <p>5. 閲覧可能なウェブ上及び委託・提供される各事項。</p>
                                     <p>共有する個人情報。</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tr" data-oznform-area="materials">
-                            <div class="th">生徒の学年 <span class="ozn-label required">必須</span></div>
-                            <div class="td">
-                                <select name="materials" class="ozn-input pc-50 tb-50" id="SelectMaterials">
-                                    <option value="">選択してください</option>
-                                    <option value="中学1年生">中学1年生</option>
-                                    <option value="中学2年生">中学2年生</option>
-                                    <option value="中学3年生">中学3年生</option>
-                                    <option value="高校1年生">高校1年生</option>
-                                    <option value="高校2年生">高校2年生</option>
-                                    <option value="高校3年生">高校3年生</option>
-                                    <option value="浪人生">浪人生</option>
-                                    <option value="その他">その他</option>
-                                </select>
-                                <div id="MaterialsEtc" class="hide">
-                                    <p>以下は「その他」を選んだ方のみ必須</p>
-                                    <dl>
-                                        <dt>その他の商品名</dt>
-                                        <dd>
-                                            <input
-                                                type="text"
-                                                name="materials-etc"
-                                                class="ozn-input"
-                                                placeholder="例）マカロン"
-                                            />
-                                        </dd>
-                                    </dl>
                                 </div>
                             </div>
                         </div>
@@ -336,20 +336,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tr" data-oznform-area="mail_body">
-                            <div class="th">お問い合わせ内容<span class="ozn-label required">必須</span></div>
-                            <div class="td">
-                                <div class="ozn-form-suggest-wrapper">
-                                    <pre id="mail_body_value"></pre>
-                                </div>
-                            </div>
-                        </div>
                         <div class="tr" data-oznform-area="materials">
                             <div class="th">生徒の学年<span class="ozn-label required">必須</span></div>
                             <div class="td">
                                 <div class="ozn-form-suggest-wrapper">
                                     <p id="materials_value"></p>
                                     <p id="materials-etc_value"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="mail_body">
+                            <div class="th">お問い合わせ内容<span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <pre id="mail_body_value"></pre>
                                 </div>
                             </div>
                         </div>
