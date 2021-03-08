@@ -170,8 +170,8 @@ jQuery(function ($) {
       // サジェストリスト用の要素を用意
       $target.after(
         '<div id="' +
-        suggest_area_id +
-        '" class="ozn-form-suggest" style="display:none;"></div>',
+          suggest_area_id +
+          '" class="ozn-form-suggest" style="display:none;"></div>',
       );
 
       new Suggest.Local(
@@ -321,6 +321,53 @@ jQuery(function ($) {
       setVaildMark($(this));
     }
 
+    let validations = [];
+
+    $.each(Object.keys(OznForm.forms), function () {
+      var form_name = this;
+      var form_config = OznForm.forms[form_name];
+      var $form_el = $('[name="' + form_name + '"]');
+
+      if (
+        !$form_el.hasClass('ozn-form-valid') &&
+        OznForm.forms[form_name]['validates']
+      ) {
+        validations.push(validFormValue(form_name, form_config, true));
+      }
+    });
+
+    if (validations.length === 0) {
+      $('#GroupButton p').hide();
+      $('#GroupButton button').show();
+    } else {
+      $.when
+        .apply($, validations)
+
+        .done(function () {
+          var results = this;
+          var is_success = true;
+
+          // 結果処理のため単値の場合は配列にする
+          // deferred処理が一つのときは結果が配列で返ってこないため
+          if (!$.isArray(results)) {
+            results = [results];
+          }
+
+          $.each(results, function () {
+            if (this == false) {
+              is_success = false;
+            }
+          });
+          if (is_success) {
+            $('#GroupButton p').hide();
+            $('#GroupButton button').show();
+          } else {
+            $('#GroupButton p').show();
+            $('#GroupButton button').hide();
+          }
+        });
+    }
+
     if (!inputed) {
       // 離脱アラートを表示（送信時は解除するため関連実装あり）
       if (OznForm.unload_message) {
@@ -334,7 +381,10 @@ jQuery(function ($) {
 
   // 送信時の入力値検証
   $('#SubmitForm').click(function () {
-    alert('Sending data....');
+    $('.form-confirm').hide();
+    $('.form-thanks').show();
+    $('.ozn-form-stepbar li').removeClass('current');
+    $('.ozn-form-stepbar li:nth-child(3)').addClass('current');
   });
   $('#BackForm').click(function () {
     $('.form-input-data').show();
@@ -348,7 +398,6 @@ jQuery(function ($) {
    * @returns {boolean}
    */
   function validateAllForms() {
-    var $this = $(this);
     const DataForm = $('form').serializeArray();
     var ajax_validations = [];
 
@@ -426,7 +475,6 @@ jQuery(function ($) {
             $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
             let addressValue = '';
             for (const elm of DataForm) {
-
               $(`#${elm.name}_value`).text(
                 elm.name == 'zip_code' && elm.value != ''
                   ? `〒${elm.value}`
@@ -480,7 +528,7 @@ jQuery(function ($) {
    * @param form_name
    * @param form_config
    */
-  function validFormValue(form_name, form_config) {
+  function validFormValue(form_name, form_config, auto_check = false) {
     var dInner = new $.Deferred();
     var t = [form_name];
     var $form_el = $('[name="' + form_name + '"]');
@@ -522,17 +570,21 @@ jQuery(function ($) {
 
     // 検証OKのときの処理
     if (response.valid) {
-      if (response.warning) {
-        setWarningMark($form_el, response.warning, form_config);
-      } else {
-        setVaildMark($form_el);
+      if (!auto_check) {
+        if (response.warning) {
+          setWarningMark($form_el, response.warning, form_config);
+        } else {
+          setVaildMark($form_el);
+        }
       }
 
       dInner.resolveWith(true);
 
       // 検証NGのときの処理
     } else {
-      setInvalidMark($form_el, response.errors[form_name], form_config);
+      if (!auto_check) {
+        setInvalidMark($form_el, response.errors[form_name], form_config);
+      }
       dInner.resolveWith(false);
     }
 
@@ -741,19 +793,19 @@ jQuery(function ($) {
       }
     }
 
-    if (is_valid) {
-      $el.after(
-        '<i class="' +
-        form_name.replace('[]', '') +
-        ' ozn-form-icon icon-ok"></i>',
-      );
-    } else {
-      $el.after(
-        '<i class="' +
-        form_name.replace('[]', '') +
-        ' ozn-form-icon icon-caution"></i>',
-      );
-    }
+    // if (is_valid) {
+    //   $el.after(
+    //     '<i class="' +
+    //       form_name.replace('[]', '') +
+    //       ' ozn-form-icon icon-ok"></i>',
+    //   );
+    // } else {
+    //   $el.after(
+    //     '<i class="' +
+    //       form_name.replace('[]', '') +
+    //       ' ozn-form-icon icon-caution"></i>',
+    //   );
+    // }
   }
 
   /**

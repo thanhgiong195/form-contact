@@ -172,7 +172,7 @@
 .ozn-input {
   box-sizing: border-box;
   margin-right: 5px;
-  width: calc(100% - 30px);
+  width: 100%;
   vertical-align: middle;
 }
 .ozn-check {
@@ -317,11 +317,13 @@ select.ozn-input {
   color: #e70012;
 }
 .ozn-form-buttons {
-  border: 1px solid #a6a6b0;
   padding: 15px 20px;
   margin: 20px auto 40px;
   overflow: hidden;
   text-align: center;
+}
+.ozn-form-buttons.has-border {
+  border: 1px solid #a6a6b0;
 }
 @media (max-width: 640px) {
   .ozn-form-buttons span {
@@ -360,12 +362,22 @@ select.ozn-input {
 .ozn-btn.back.ozn-form-sending {
   display: none;
 }
+.box-content-after-validate {
+  width: 300px;
+  background-color: red;
+  display: block;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+}
 .ozn-btn.submit {
   color: #fff;
   font-weight: 700;
-  padding: 10px 30px;
-  float: right;
-  font-size: 1.8rem;
+  padding: 20px 30px;
+  font-size: 2.8rem;
   background-image: -moz-linear-gradient(
     90deg,
     #c61316 0,
@@ -382,6 +394,9 @@ select.ozn-input {
     rgba(198, 19, 22, 0.5) 100%
   );
   border-color: #970f11;
+}
+.ozn-btn.submit.f-right {
+  float: right;
 }
 .ozn-btn.submit.ozn-form-disabled {
   background-color: #999;
