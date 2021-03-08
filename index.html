@@ -64,6 +64,12 @@
                     error_messages: [],
                     validate_condition: [],
                 },
+                mail_body: {
+                    label: 'お問い合わせ内容',
+                    validates: ['required'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
                 materials: {
                     label: '興味のある商品',
                     validates: ['required'],
@@ -221,6 +227,43 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tr" data-oznform-area="mail_body">
+                            <div class="th">お問い合わせ内容 <span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <textarea
+                                    name="mail_body"
+                                    rows="10"
+                                    class="ozn-input"
+                                    placeholder="お子様の学年：高校2年生の娘です。英語レベル：今年3月に英検準2級を取得しました。重点的に学習したい点：文法。希望内容：難関大学受験に通用する英語力、スピーチ力を身に着けたく、体験授業を希望します。など必要な情報をお書き添え頂きますと、大変スムーズに初回無料レッスンにご案内させて頂けます。"
+                                ></textarea>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="mail_body_note">
+                            <div class="th">個人情報の取り扱いについて</div>
+                            <div class="td">
+                                <div class="privacy-inner">
+                                    <p>個人情報の取得は、次の各項の範囲を原則とします。</p>
+                                    <p>
+                                        1.
+                                        当社関係者及び当社に入塾、入会、入社、研修を検討又はされる方々（以下、「当社関係者の方々」）の本人氏名・保護者氏名・住所・電話番号・在籍／卒業学校名等で、入塾申込書・口座振替依頼書・個人カルテ等入塾／入会手続きに関わる書類及び労働契約書類に記載されている各事項。
+                                    </p>
+                                    <p>
+                                        2.
+                                        当社への提出書類、申請書類、申込書類に含まれる氏名・住所・電話番号、成績、志望校等。
+                                    </p>
+                                    <p>
+                                        3.
+                                        当社で実施する各種小テスト・模擬試験・実力試験・選抜試験データ及び外部模試成績データ。
+                                    </p>
+                                    <p>
+                                        4.
+                                        当社事業活動の経過において発生する、入試・進路指導等に係る生徒のデータ、考課・研修・雇用管理等に係る従業員のデータ及び研修受講者のデータ。
+                                    </p>
+                                    <p>5. 閲覧可能なウェブ上及び委託・提供される各事項。</p>
+                                    <p>共有する個人情報。</p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="tr" data-oznform-area="materials">
                             <div class="th">生徒の学年 <span class="ozn-label required">必須</span></div>
                             <div class="td">
@@ -250,15 +293,6 @@
                                     </dl>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="privacy-wrapper">
-                        <h2>個人情報の取り扱いについて</h2>
-                        <div class="privacy-inner">
-                            <p>
-                                お子様の学年：高校2年生の娘です。英語レベル：今年3月に英検準2級を取得しました。重点的に学習したい点：文法。希望内容：難関大学受験に通用する英語力、スピーチ力を身に着けたく、体験授業を希望します。など必要な情報をお書き添え頂きますと、大変スムーズに初回無料レッスンにご案内させて頂けます。
-                            </p>
                         </div>
                     </div>
 
@@ -299,6 +333,14 @@
                             <div class="td">
                                 <div class="ozn-form-suggest-wrapper">
                                     <p id="email_value"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="mail_body">
+                            <div class="th">お問い合わせ内容<span class="ozn-label required">必須</span></div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <pre id="mail_body_value"></pre>
                                 </div>
                             </div>
                         </div>
