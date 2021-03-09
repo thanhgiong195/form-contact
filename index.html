@@ -70,7 +70,7 @@
                     error_messages: [],
                     validate_condition: [],
                 },
-                materials: {
+                class_room: {
                     label: '興味のある商品',
                     validates: ['required'],
                     error_messages: [],
@@ -251,13 +251,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tr" data-oznform-area="materials">
+                        <div class="tr" data-oznform-area="class_room">
                             <div class="th">
                                 生徒の学年
                                 <span class="ozn-label required">必須</span>
                             </div>
                             <div class="td">
-                                <select name="materials" class="ozn-input pc-50 tb-50" id="SelectMaterials">
+                                <select name="class_room" class="ozn-input pc-50 tb-50" id="SelectClassroom">
                                     <option value="">選択してください</option>
                                     <option value="中学1年生">中学1年生</option>
                                     <option value="中学2年生">中学2年生</option>
@@ -268,14 +268,14 @@
                                     <option value="浪人生">浪人生</option>
                                     <option value="その他">その他</option>
                                 </select>
-                                <div id="MaterialsEtc" class="hide">
+                                <div id="ClassroomEtc" class="hide">
                                     <p>以下は「その他」を選んだ方のみ必須</p>
                                     <dl>
                                         <dt>その他の商品名</dt>
                                         <dd>
                                             <input
                                                 type="text"
-                                                name="materials-etc"
+                                                name="class_room-etc"
                                                 class="ozn-input"
                                                 placeholder="例）マカロン"
                                             />
@@ -333,6 +333,7 @@
                             必須項目を全て入力すると<br />
                             確認ボタンが表示されます。
                         </p>
+                        <input type="hidden" name="submit_data" />
                         <button type="submit" class="ozn-btn ozn-form-nav submit text-center hide">
                             お問い合わせ内容を確認する
                         </button>
@@ -377,12 +378,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tr" data-oznform-area="materials">
+                        <div class="tr" data-oznform-area="class_room">
                             <div class="th">生徒の学年<span class="ozn-label required">必須</span></div>
                             <div class="td">
                                 <div class="ozn-form-suggest-wrapper">
-                                    <p id="materials_value"></p>
-                                    <p id="materials-etc_value"></p>
+                                    <p id="class_room_value"></p>
+                                    <p id="class_room-etc_value"></p>
                                 </div>
                             </div>
                         </div>
