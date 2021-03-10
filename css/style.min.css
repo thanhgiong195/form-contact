@@ -131,6 +131,9 @@ img {
 .container {
     padding: 0 10px;
 }
+.text-center {
+    text-align: center;
+}
 .site-footer,
 .site-header {
     background-color: #d8cfc6;
@@ -168,7 +171,7 @@ img {
     margin-bottom: 20px;
 }
 .privacy-wrapper {
-    width: 88%;
+    max-width: 750px;
     margin: 0 auto 30px;
 }
 .privacy-wrapper .privacy-inner {
@@ -184,7 +187,8 @@ form .privacy-inner {
     overflow: auto;
 }
 form .privacy-inner p {
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 1.5;
 }
 @media (max-width: 480px) {
     .sp-hide {

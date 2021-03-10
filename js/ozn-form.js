@@ -360,6 +360,7 @@ jQuery(function ($) {
 
     // 送信時の入力値検証
     $('#SubmitForm').click(function () {
+        $('.text-note-confirm').hide();
         $('.form-confirm').hide();
         $('.form-thanks').show();
         $('.ozn-form-stepbar li').removeClass('current');
@@ -368,6 +369,7 @@ jQuery(function ($) {
     $('#BackForm').click(function () {
         $('.form-input-data').show();
         $('.form-confirm').hide();
+        $('.text-note-confirm').hide();
     });
     $('form').submit(validateAllForms);
 
@@ -404,6 +406,7 @@ jQuery(function ($) {
 
             // submitFormAfterCheckValidate();
             $('.form-input-data').hide();
+            $('.text-note-confirm').show();
             $('.form-confirm').show();
             $('.ozn-form-stepbar li').removeClass('current');
             $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
@@ -442,6 +445,7 @@ jQuery(function ($) {
                         // -- 全て検証OKの時の処理
 
                         $('.form-input-data').hide();
+                        $('.text-note-confirm').show();
                         $('.form-confirm').show();
                         $('.ozn-form-stepbar li').removeClass('current');
                         $('.ozn-form-stepbar li:nth-child(2)').addClass('current');

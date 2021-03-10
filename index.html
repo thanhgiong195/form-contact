@@ -107,9 +107,12 @@
                     <li>確認</li>
                     <li>完了</li>
                 </ol>
-                <p>
-                    お問い合わせいただきました後、折り返し、初回無料体験授業の空き枠をご連絡（または、お問い合わせ頂きました内容へのご返答）いたします。
-                </p>
+                <div class="text-note-confirm hide">
+                    <h4 style="margin-bottom: 0">ご入力内容の確</h4>
+                    <p>
+                        下記の入力内容に間違いがなければ、一番下の「この内容で送信する」ボタンを押し、送信を完了してください。
+                    </p>
+                </div>
             </div>
 
             <div class="ozn-form-container">
@@ -153,10 +156,7 @@
                             <div class="th">ご住所</div>
                             <div class="td">
                                 <dl>
-                                    <dt>
-                                        郵便番号
-                                        <span class="ozn-label optional">任意</span>
-                                    </dt>
+                                    <dt>郵便番号</dt>
                                     <dd>
                                         <input
                                             type="tel"
@@ -202,10 +202,7 @@
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>
-                                        建物名等
-                                        <span class="ozn-label optional">任意</span>
-                                    </dt>
+                                    <dt>建物名等</dt>
                                     <dd>
                                         <input
                                             type="text"
@@ -335,7 +332,7 @@
                         </p>
                         <input type="hidden" name="submit_data" />
                         <button type="submit" class="ozn-btn ozn-form-nav submit text-center hide">
-                            お問い合わせ内容を確認する
+                            入力内容の確認に進む →
                         </button>
                     </div>
                 </form>
@@ -406,13 +403,20 @@
                 </div>
 
                 <div class="form-thanks hide">
-                    <div class="ozn-form-inner">
-                        <p>無料体験のお申込み・お問い合わせありがとうございました。</p>
-                        <p>ご予約いただきました日時、お会いできますこと、心よりお待ちしております。</p>
-                        <p>
-                            ※タイミングによっては、上記日程でのご予約が埋まってしまう場合ございます。その際は改めて日程ご案内いたします
-                        </p>
-                        <p>※入力にエラーなどございます場合、こちらから改めてご連絡いたします</p>
+                    <div class="ozn-form-inner" style="border: none">
+                        <h4 style="margin: 0">送信完了しました</h4>
+                        <p>初回無料体験授業のお申込み、お問い合わせありがとうございました。</p>
+                        <br />
+                        <p>・初回無料体験授業にお申込みの方</p>
+                        <p>詳細は、お問い合わせ後に自動送信されるメールの内容をご確認ください。</p>
+                        <p>入力間違いなどございます場合は、担当者より、改めてご連絡いたします。</p>
+                        <p>タイミングによっては、上記日程でのご予約が埋まってしまう場合ございます。</p>
+                        <p>その際は改めて、担当者よりご連絡をいたします。</p>
+                        <p>ご連絡に2～3日かかる場合がございます。ご容赦ください。</p>
+                        <br />
+                        <p>・お問い合わせいただきました方</p>
+                        <p>担当者が内容を確認のうえ、改めてご連絡いたします。</p>
+                        <p>ご連絡に2～3日かかる場合がございます。ご容赦ください。</p>
                     </div>
                 </div>
             </div>
