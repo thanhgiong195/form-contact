@@ -436,6 +436,8 @@ select.ozn-input {
     padding: 0 40px 0 20px;
     background-color: #e9e8ea;
     box-sizing: border-box;
+    font-weight: bold;
+    font-size: 16px;
 }
 .ozn-form-stepbar li:after,
 .ozn-form-stepbar li:before {
@@ -476,7 +478,7 @@ select.ozn-input {
 }
 .ozn-form-stepbar li.current {
     color: #fff;
-    background-color: #6c9bc2;
+    background-color: #16184d;
 }
 .ozn-form-stepbar li.current:after,
 .ozn-form-stepbar li.current:before {
