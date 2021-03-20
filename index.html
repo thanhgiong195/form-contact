@@ -76,6 +76,54 @@
                     error_messages: [],
                     validate_condition: [],
                 },
+                taikenbi: {
+                    label: '無料体験授業のご希望日',
+                    validates: ['required'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                taikenjikan: {
+                    label: '無料体験授業のご希望時間帯',
+                    validates: ['required'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                taikenbayso: {
+                    label: '無料体験授業のご希望受講場所',
+                    validates: ['required'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                gakkou: {
+                    label: '生徒の学校',
+                    validates: [],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                taikenwant: {
+                    label: '体験授業で学びたいこと',
+                    validates: [],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                taikenexperience: {
+                    label: '現在持っている英語の資格や英語学習歴、他塾経験、海外在住・留学経験があれば教えてください。',
+                    validates: [],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                taikengoal: {
+                    label: '目標があれば教えてください',
+                    validates: [],
+                    error_messages: [],
+                    validate_condition: [],
+                },
+                taikenbeefup: {
+                    label: '今後強化したい分野',
+                    validates: [],
+                    error_messages: [],
+                    validate_condition: [],
+                },
             };
             OznForm.reCAPTCHA = false;
             // OznForm.reCAPTCHA_sitekey = '6Leu6LIUAAAAAGom3z6WjRiPcBVoYU6ZylRGUQFf';
@@ -295,6 +343,142 @@
                                 ></textarea>
                             </div>
                         </div>
+                        <div class="tr" data-oznform-area="taikenbi">
+                            <div class="th">
+                                無料体験授業のご希望日
+                                <span class="ozn-label required">必須</span>
+                            </div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <input
+                                        name="taikenbi"
+                                        style="ime-mode: inactive"
+                                        class="ozn-input"
+                                        placeholder="例：第一希望：1月1日　第二希望：1月10日"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikenjikan">
+                            <div class="th">
+                                無料体験授業のご希望時間帯
+                                <span class="ozn-label required">必須</span>
+                            </div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <select name="taikenjikan" class="ozn-input pc-50 tb-50">
+                                        <option value="">選択してください</option>
+                                        <option value="日曜日 13時00〜14時30">日曜日 13時00〜14時30</option>
+                                        <option value="日曜日 15時00〜16時30">日曜日 15時00〜16時30</option>
+                                        <option value="火曜日 17時00〜18時30">火曜日 17時00〜18時30</option>
+                                        <option value="火曜日 19時00〜20時30">火曜日 19時00〜20時30</option>
+                                        <option value="水曜日 17時00〜18時30">水曜日 17時00〜18時30</option>
+                                        <option value="水曜日 19時00〜20時30">水曜日 19時00〜20時30</option>
+                                        <option value="金曜日 17時00〜18時30">金曜日 17時00〜18時30</option>
+                                        <option value="金曜日 19時00〜20時30">金曜日 19時00〜20時30</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikenbayso">
+                            <div class="th">
+                                無料体験授業のご希望受講場所
+                                <span class="ozn-label required">必須</span>
+                            </div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <select name="taikenbayso" class="ozn-input pc-50 tb-50">
+                                        <option value="">選択してください</option>
+                                        <option value="目黒教室">目黒教室</option>
+                                        <option value="オンライン">オンライン</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="gakkou">
+                            <div class="th">生徒の学校</div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <input
+                                        name="gakkou"
+                                        style="ime-mode: inactive"
+                                        class="ozn-input"
+                                        placeholder="例：私立目黒高等学校"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikenwant">
+                            <div class="th">体験授業で学びたいこと</div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <textarea
+                                        name="taikenwant"
+                                        rows="10"
+                                        class="ozn-input"
+                                        placeholder="例：内容が具体的であればあるほど成果が出やすいです"
+                                    ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikenexperience">
+                            <div class="th">
+                                現在持っている英語の資格や英語学習歴、他塾経験、海外在住・留学経験があれば教えてください。
+                            </div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <input
+                                        name="taikenexperience"
+                                        style="ime-mode: inactive"
+                                        class="ozn-input"
+                                        placeholder=""
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikengoal">
+                            <div class="th">目標があれば教えてください</div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <input
+                                        name="taikengoal"
+                                        style="ime-mode: inactive"
+                                        class="ozn-input"
+                                        placeholder="例：大学合格、英検〇級合格など"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikenbeefup">
+                            <div class="th">今後強化したい分野</div>
+                            <div class="td">
+                                <div class="ozn-check horizontal">
+                                    <label>
+                                        <input type="checkbox" name="taikenbeefup" value="リーディング" />
+                                        リーディング
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="taikenbeefup" value="ライティング" />
+                                        ライティング
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="taikenbeefup" value="リスニング" /> リスニング
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="taikenbeefup" value="スピーキング" />
+                                        スピーキング
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="taikenbeefup" value="語彙" />
+                                        語彙
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="taikenbeefup" value="その他" />
+                                        その他
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="privacy-wrapper">
@@ -392,6 +576,81 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tr" data-oznform-area="taikenbi">
+                            <div class="th">
+                                無料体験授業のご希望日
+                                <span class="ozn-label required">必須</span>
+                            </div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <p id="taikenbi_value"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikenjikan">
+                            <div class="th">
+                                無料体験授業のご希望時間帯
+                                <span class="ozn-label required">必須</span>
+                            </div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <p id="taikenjikan_value"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikenbayso">
+                            <div class="th">
+                                無料体験授業のご希望受講場所
+                                <span class="ozn-label required">必須</span>
+                            </div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <p id="taikenbayso_value"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="gakkou">
+                            <div class="th">生徒の学校</div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <p id="gakkou_value"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikenwant">
+                            <div class="th">体験授業で学びたいこと</div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <pre style="background: white; color: black" id="taikenwant_value"></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikenexperience">
+                            <div class="th">
+                                現在持っている英語の資格や英語学習歴、他塾経験、海外在住・留学経験があれば教えてください。
+                            </div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <p id="taikenexperience_value"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikengoal">
+                            <div class="th">目標があれば教えてください</div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <p id="taikengoal_value"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tr" data-oznform-area="taikenbeefup">
+                            <div class="th">今後強化したい分野</div>
+                            <div class="td">
+                                <div class="ozn-form-suggest-wrapper">
+                                    <p id="taikenbeefup_value"></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="ozn-form-buttons has-border">
@@ -416,7 +675,8 @@
                         <br />
                         <p>・お問い合わせいただきました方</p>
                         <p>担当者が内容を確認のうえ、改めてご連絡いたします。</p>
-                        <p>ご連絡に2～3日かかる場合がございます。ご容赦ください。</p>
+                        <p>ご連絡に2～3日かかる場合がございます。ご容赦ください。</p></br>
+                        <a href="#">>>トップページへ戻る</a>
                     </div>
                 </div>
             </div>

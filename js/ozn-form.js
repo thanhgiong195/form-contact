@@ -11,7 +11,11 @@ jQuery(function ($) {
         email: 'メールアドレス',
         mail_body: 'お問い合わせ内容',
         survey: '当社を何で知りましたか',
-        materials: '生徒の学年',
+        class_room: '生徒の学年',
+        taikenbi: '無料体験授業のご希望日',
+        taikenjikan: '無料体験授業のご希望時間帯',
+        taikenbayso: '無料体験授業のご希望受講場所',
+        gakkou: '生徒の学校',
     };
     const REGEX = {
         email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -412,13 +416,21 @@ jQuery(function ($) {
             $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
 
             let addressValue = '';
+            let taikenbeefupData = '';
             for (const elm of DataForm) {
-                $(`#${elm.name}_value`).text(elm.name == 'zip_code' && elm.value != '' ? `〒${elm.value}` : elm.value);
+                if (elm.name == 'taikenbeefup') {
+                    taikenbeefupData += elm.value + ', ';
+                } else {
+                    $(`#${elm.name}_value`).text(
+                        elm.name == 'zip_code' && elm.value != '' ? `〒${elm.value}` : elm.value,
+                    );
 
-                if (['pref', 'address', 'address_building'].includes(elm.name)) {
-                    addressValue += elm.value;
+                    if (['pref', 'address', 'address_building'].includes(elm.name)) {
+                        addressValue += elm.value;
+                    }
                 }
             }
+            $(`#taikenbeefup_value`).text(taikenbeefupData.slice(0, -2));
             $(`#address_value`).text(addressValue);
         } else {
             // 可変数のDeferredを並列実行させる
@@ -449,16 +461,23 @@ jQuery(function ($) {
                         $('.form-confirm').show();
                         $('.ozn-form-stepbar li').removeClass('current');
                         $('.ozn-form-stepbar li:nth-child(2)').addClass('current');
-                        let addressValue = '';
-                        for (const elm of DataForm) {
-                            $(`#${elm.name}_value`).text(
-                                elm.name == 'zip_code' && elm.value != '' ? `〒${elm.value}` : elm.value,
-                            );
 
-                            if (['pref', 'address', 'address_building'].includes(elm.name)) {
-                                addressValue += elm.value;
+                        let addressValue = '';
+                        let taikenbeefupData = '';
+                        for (const elm of DataForm) {
+                            if (elm.name == 'taikenbeefup') {
+                                taikenbeefupData += elm.value + ', ';
+                            } else {
+                                $(`#${elm.name}_value`).text(
+                                    elm.name == 'zip_code' && elm.value != '' ? `〒${elm.value}` : elm.value,
+                                );
+
+                                if (['pref', 'address', 'address_building'].includes(elm.name)) {
+                                    addressValue += elm.value;
+                                }
                             }
                         }
+                        $(`#taikenbeefup_value`).text(taikenbeefupData.slice(0, -2));
                         $(`#address_value`).text(addressValue);
                         return false;
                         // submitFormAfterCheckValidate();

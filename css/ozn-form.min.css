@@ -367,7 +367,7 @@ select.ozn-input {
     background-image: -moz-linear-gradient(90deg, #2bb94c 0, rgba(198, 19, 22, 0.5) 100%);
     background-image: -webkit-linear-gradient(90deg, #2bb94c 0, rgba(198, 19, 22, 0.5) 100%);
     background-image: -ms-linear-gradient(90deg, #2bb94c 0, rgba(198, 19, 22, 0.5) 100%);
-    border-color: #970f11;
+    border: none;
 }
 .ozn-btn.submit.f-right {
     float: right;
