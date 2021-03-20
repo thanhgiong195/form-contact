@@ -483,7 +483,7 @@ select.ozn-input {
 }
 .ozn-form-stepbar li.current:after,
 .ozn-form-stepbar li.current:before {
-    background-color: #6c9bc2;
+    background-color: #16184d;
 }
 .ozn-form-stepbar.step2 li {
     width: 50%;

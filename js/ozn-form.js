@@ -554,7 +554,7 @@ jQuery(function ($) {
             post_data.mobile_warning = form_config.mobile_mail_warning;
         }
 
-        clearInvalidMessages(form_name);
+        if (!auto_check) clearInvalidMessages(form_name);
 
         var response = checkValidate(post_data);
 
