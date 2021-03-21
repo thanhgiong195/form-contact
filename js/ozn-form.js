@@ -21,6 +21,7 @@ jQuery(function ($) {
         email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         katakana: /[ァ-ンｧ-ﾝﾞﾟ]$/,
         phone: /^\d{2,3}-\d{3,4}-\d{3,4}$|^\d{10,11}$/,
+        zip_code: /^\d{3}-\d{4}$|^\d{7}$/,
     };
 
     // ページ離脱時にアラートを表示する
@@ -76,7 +77,9 @@ jQuery(function ($) {
 
                 var $zip_fields = $('input[data-oznform-zip="' + keyword + '"]');
                 var pref_elem_name = $('input[data-oznform-pref="' + keyword + '"]').attr('name');
-                var addr_elem_name = $('input[data-oznform-address="' + keyword + '"]').attr('name');
+                var addr_elem_name = $('input[data-oznform-address="' + keyword + '"]').attr(
+                    'name',
+                );
 
                 if (!pref_elem_name) {
                     pref_elem_name = addr_elem_name;
@@ -160,7 +163,11 @@ jQuery(function ($) {
             $target.attr('autocomplete', 'off');
 
             // サジェストリスト用の要素を用意
-            $target.after('<div id="' + suggest_area_id + '" class="ozn-form-suggest" style="display:none;"></div>');
+            $target.after(
+                '<div id="' +
+                    suggest_area_id +
+                    '" class="ozn-form-suggest" style="display:none;"></div>',
+            );
 
             new Suggest.Local(
                 $target.get(0),
@@ -469,7 +476,9 @@ jQuery(function ($) {
                                 taikenbeefupData += elm.value + ', ';
                             } else {
                                 $(`#${elm.name}_value`).text(
-                                    elm.name == 'zip_code' && elm.value != '' ? `〒${elm.value}` : elm.value,
+                                    elm.name == 'zip_code' && elm.value != ''
+                                        ? `〒${elm.value}`
+                                        : elm.value,
                                 );
 
                                 if (['pref', 'address', 'address_building'].includes(elm.name)) {
@@ -615,7 +624,9 @@ jQuery(function ($) {
             if (valid == 'kanaOnly' && value) {
                 if (!REGEX.katakana.test(value)) {
                     validateJSON.valid = false;
-                    validateJSON.errors[name] = [`${elmLabelError}は「ひらがな」か「カタカナ」で入力してください`];
+                    validateJSON.errors[name] = [
+                        `${elmLabelError}は「ひらがな」か「カタカナ」で入力してください`,
+                    ];
                     break;
                 }
             }
@@ -627,6 +638,15 @@ jQuery(function ($) {
                     validateJSON.errors[name] = [
                         `${elmLabelError}は市外局番を含む数字またはハイフンの組み合わせで入力してください`,
                     ];
+                    break;
+                }
+            }
+
+            // zip code
+            if (valid == 'zip_code' && value) {
+                if (!REGEX.zip_code.test(value)) {
+                    validateJSON.valid = false;
+                    validateJSON.errors[name] = [`7桁の郵便番号を入力してください`];
                     break;
                 }
             }
@@ -728,7 +748,9 @@ jQuery(function ($) {
 
         // エラーメッセージテンプレートがあればデフォルトテンプレートを置換
         if (form_config.error_message_template) {
-            template = $(form_config.error_message_template.replace('<% messages %>', msg.join('<br />')));
+            template = $(
+                form_config.error_message_template.replace('<% messages %>', msg.join('<br />')),
+            );
         }
 
         // ドメインサジェスト表示エリアを取得
@@ -796,7 +818,10 @@ jQuery(function ($) {
             var form_name = $this.data('oznformArea');
             var $form = $('[name="' + form_name + '"]');
 
-            if ($form.hasClass('ozn-form-valid') || $form.closest('.ozn-check').hasClass('ozn-form-valid')) {
+            if (
+                $form.hasClass('ozn-form-valid') ||
+                $form.closest('.ozn-check').hasClass('ozn-form-valid')
+            ) {
                 // $this.hide();
             }
         });

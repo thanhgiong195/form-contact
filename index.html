@@ -64,12 +64,6 @@
                     error_messages: [],
                     validate_condition: [],
                 },
-                mail_body: {
-                    label: 'お問い合わせ内容',
-                    validates: ['required'],
-                    error_messages: [],
-                    validate_condition: [],
-                },
                 class_room: {
                     label: '興味のある商品',
                     validates: ['required'],
@@ -213,7 +207,7 @@
                                             name="zip_code"
                                             class="ozn-input pc-30 tb-50"
                                             style="ime-mode: inactive"
-                                            placeholder="例）432-3332"
+                                            placeholder="例）153-0064"
                                             data-oznform-zip="address"
                                             autocomplete="postal-code"
                                         />
@@ -229,7 +223,7 @@
                                         <input
                                             name="pref"
                                             class="ozn-input pc-30 tb-50"
-                                            placeholder="例）愛知県"
+                                            placeholder="例）東京都"
                                             data-oznform-pref="address"
                                             autocomplete="address-level1"
                                         />
@@ -246,7 +240,7 @@
                                             name="address"
                                             class="ozn-input"
                                             data-oznform-address="address"
-                                            placeholder="例）名古屋市中村区＊＊町3丁目11-1"
+                                            placeholder="例）目黒区下目黒2-20-22"
                                             autocomplete="street-address"
                                         />
                                     </dd>
@@ -258,7 +252,7 @@
                                             type="text"
                                             name="address_building"
                                             class="ozn-input"
-                                            placeholder="例）＊＊ビル 201号室"
+                                            placeholder="例）サンパレス目黒201"
                                             autocomplete="address-level4"
                                         />
                                     </dd>
@@ -276,7 +270,7 @@
                                     name="tel"
                                     class="ozn-input"
                                     style="ime-mode: inactive"
-                                    placeholder="例）000-111-2222"
+                                    placeholder="例）03-1234-5678"
                                     autocomplete="tel-national"
                                 />
                                 <p class="ozn-notice">日中にご連絡の取りやすい番号をご記入ください。</p>
@@ -329,20 +323,6 @@
                                         </dd>
                                     </dl>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="tr" data-oznform-area="mail_body">
-                            <div class="th">
-                                お問い合わせ内容
-                                <span class="ozn-label required">必須</span>
-                            </div>
-                            <div class="td">
-                                <textarea
-                                    name="mail_body"
-                                    rows="10"
-                                    class="ozn-input"
-                                    placeholder="お子様の学年：高校2年生の娘です。英語レベル：今年3月に英検準2級を取得しました。重点的に学習したい点：文法。希望内容：難関大学受験に通用する英語力、スピーチ力を身に着けたく、体験授業を希望します。など必要な情報をお書き添え頂きますと、大変スムーズに初回無料レッスンにご案内させて頂けます。"
-                                ></textarea>
                             </div>
                         </div>
                         <div class="tr" data-oznform-area="taikenbi">
@@ -507,7 +487,7 @@
                         </div>
 
                         <h4 class="text-center">
-                            上記　個人情報保護方針にご同意いただきましたら、入力内容の確認へお進ください。
+                            上記　個人情報保護方針にご同意いただきましたら、入力内容の確認へお進みください。
                         </h4>
                     </div>
 
@@ -567,14 +547,6 @@
                                 <div class="ozn-form-suggest-wrapper">
                                     <p id="class_room_value"></p>
                                     <p id="class_room-etc_value"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tr" data-oznform-area="mail_body">
-                            <div class="th">お問い合わせ内容<span class="ozn-label required">必須</span></div>
-                            <div class="td">
-                                <div class="ozn-form-suggest-wrapper">
-                                    <pre id="mail_body_value"></pre>
                                 </div>
                             </div>
                         </div>
