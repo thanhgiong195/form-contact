@@ -50,6 +50,12 @@
                     error_messages: [],
                     validate_condition: [],
                 },
+                address_building: {
+                    label: '建物名等',
+                    validates: ['required'],
+                    error_messages: [],
+                    validate_condition: [],
+                },
                 tel: {
                     label: '電話番号',
                     validates: ['required', 'tel'],
@@ -246,7 +252,7 @@
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>建物名等</dt>
+                                    <dt>建物名等<span class="ozn-label required">必須</span></dt>
                                     <dd>
                                         <input
                                             type="text"
@@ -336,7 +342,7 @@
                                         name="taikenbi"
                                         style="ime-mode: inactive"
                                         class="ozn-input"
-                                        placeholder="例：第一希望：1月1日　第二希望：1月10日"
+                                        placeholder="例）第一希望：1月1日　第二希望：1月10日"
                                     />
                                 </div>
                             </div>
@@ -385,7 +391,7 @@
                                         name="gakkou"
                                         style="ime-mode: inactive"
                                         class="ozn-input"
-                                        placeholder="例：私立目黒高等学校"
+                                        placeholder="例）私立目黒高等学校"
                                     />
                                 </div>
                             </div>
@@ -398,7 +404,7 @@
                                         name="taikenwant"
                                         rows="10"
                                         class="ozn-input"
-                                        placeholder="例：内容が具体的であればあるほど成果が出やすいです"
+                                        placeholder="例）内容が具体的であればあるほど成果が出やすいです"
                                     ></textarea>
                                 </div>
                             </div>
@@ -426,7 +432,7 @@
                                         name="taikengoal"
                                         style="ime-mode: inactive"
                                         class="ozn-input"
-                                        placeholder="例：大学合格、英検〇級合格など"
+                                        placeholder="例）大学合格、英検〇級合格など"
                                     />
                                 </div>
                             </div>

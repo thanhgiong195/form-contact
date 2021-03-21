@@ -7,6 +7,7 @@ jQuery(function ($) {
         customer_kana: 'フリガナ',
         pref: '都道府県',
         address: '番地まで',
+        address_building: '建物名等',
         tel: '電話番号',
         email: 'メールアドレス',
         mail_body: 'お問い合わせ内容',
