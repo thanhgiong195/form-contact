@@ -1,0 +1,354 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+body *:focus,
+html *:focus {
+  border: none;
+  outline: none;
+}
+
+.calendar-wrapper {
+   height: auto;
+   margin: 0 auto;
+}
+
+.calendar-header {
+   background-color: rgba(18, 15, 25, 0.25);
+   height: 100%;
+   padding: 20px;
+   color: #fff;
+   font-weight: 300;
+   position: relative;
+}
+
+.calendar-header a {
+   top: 50%;
+   transform: translateY(-50%);
+}
+
+.calendar-header a img {
+   width: 12px;
+}
+
+.calendar-header .prev-button {
+   left: 2%;
+}
+
+.calendar-header .next-button {
+   right: 2%;
+}
+
+.header-title {
+   width: 100%;
+}
+
+.header-title .header-text {
+   width: 100%;
+   text-align: center;
+}
+
+.header-title .header-text #month-name {
+   font-size: 40px;
+}
+
+.header-title .header-text #todayDayName {
+   font-size: 30px;
+}
+
+.header-background {
+   background-image: url("https://raw.githubusercontent.com/JustMonk/codepen-resource-project/master/img/compressed-header.jpg");
+   height: 200px;
+   background-position: center right;
+   background-size: cover;
+}
+
+.calendar-content {
+   background-color: #fff;
+   padding: 0 0 20px;
+   overflow: hidden;
+}
+
+.event-mark {
+   width: 5px;
+   height: 5px;
+   background-color: teal;
+   border-radius: 100px;
+   position: absolute;
+   left: 46%;
+   top: 70%;
+}
+
+.emptyForm {
+   padding: 20px;
+   padding-left: 15%;
+   padding-right: 15%;
+}
+
+.emptyForm h4 {
+   color: #fff;
+   margin-bottom: 2rem;
+}
+
+.sidebar-wrapper {
+   color: #fff;
+   background-color: #5a649c !important;
+   padding-top: 0;
+   padding-bottom: 20px;
+   font-weight: 300;
+   padding-left: 0;
+   padding-right: 0;
+   width: 400px;
+}
+
+.sidebar-title {
+   padding: 20px;
+	text-align: center;
+}
+
+.sidebar-title h4 {
+   margin-top: 0;
+}
+
+.sidebar-events {
+   overflow-x: hidden;
+   overflow-y: hidden;
+}
+
+.empty-message {
+   font-size: 1.2rem;
+   padding: 15px 6% 15px 12%;
+}
+
+.eventCard {
+   background-color: #fff;
+   color: black;
+   padding: 12px 15px;
+   border-bottom: 1px solid #E5E5E5;
+   position: relative;
+   animation: slideInDown 0.2s;
+}
+
+.eventCard .inp {
+   margin-bottom: 8px;
+}
+
+.eventCard-header {
+   font-weight: bold;
+}
+
+.eventCard-description {
+   color: grey;
+}
+
+.eventCard-mark-wrapper {
+   position: absolute;
+   right: 0;
+   top: 0;
+   height: 100%;
+   width: 60px;
+   background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 100%);
+}
+
+.eventCard-mark {
+   width: 8px;
+   height: 8px;
+   background-color: #b39ddb;
+   border-radius: 100px;
+   position: absolute;
+   left: 50%;
+   top: 45%;
+}
+
+.day-mark {
+   width: 7px;
+   height: 7px;
+   background-color: #b39ddb;
+   border-radius: 100px;
+   position: absolute;
+   left: 47%;
+   top: 67%;
+}
+
+.content-wrapper {
+   padding-top: 50px;
+   padding-bottom: 50px;
+   margin-right: 400px;
+}
+
+#table-body .col:hover {
+   cursor: pointer;
+   /*border: 1px solid grey;*/
+   background-color: #E0E0E0;
+}
+
+.empty-day:hover {
+   cursor: default !important;
+   background-color: #fff !important;
+}
+
+#table-body .row .col {
+   padding: .75rem;
+}
+
+#table-body .row .col:last-child {
+   display: none;
+}
+
+#table-body .col {
+   border: 1px solid transparent;
+}
+
+#table-body .row {
+   margin-bottom: 0;
+}
+
+#table-body .col {
+   padding-top: 1.3rem !important;
+   padding-bottom: 1.3rem !important;
+}
+
+#calendar-table {
+   text-align: center;
+}
+
+#calendar-table #table-header {
+   background-color: lightgoldenrodyellow;
+   padding: 20px 0;
+}
+
+.prev-button {
+   position: absolute;
+   cursor: pointer;
+   left: 0%;
+   top: 35%;
+   color: grey !important;
+}
+
+.prev-button i {
+   font-size: 4em;
+}
+
+.next-button {
+   position: absolute;
+   cursor: pointer;
+   right: 0%;
+   top: 35%;
+   color: grey !important;
+}
+
+.next-button i {
+   font-size: 4em;
+}
+
+.addEvent {
+   box-shadow: 0 5px 15px rgb(57, 168, 228);
+   background-color: #39a8e4;
+   padding: 10px;
+   padding-left: 3em;
+   padding-right: 3em;
+   cursor: pointer;
+   border-radius: 25px;
+   color: #fff !important;
+   background-image: linear-gradient(135deg, #8d8dd4, #45ced4);
+}
+
+.addEvent:hover {
+   transition: box-shadow 0.5s;
+   box-shadow: 0 4px 25px rgb(57, 168, 228);
+}
+
+.mobile-header {
+   padding: 0;
+   display: none;
+   padding-top: 20px;
+   padding-bottom: 20px;
+   position: fixed;
+   z-index: 99;
+   width: 100%;
+   background-color: #5a649c !important;
+}
+
+.mobile-header a i {
+   color: #fff;
+   font-size: 38px;
+}
+
+.mobile-header h4 {
+   color: #fff;
+}
+
+.mobile-header .row {
+   margin-bottom: 0;
+}
+
+.mobile-header h4 {
+   margin: 0;
+   font-weight: 300;
+}
+
+.side-nav.fixed {
+   right: 0;
+   left: auto;
+   top: 0;
+   height: 100%;
+   position: absolute;
+}
+
+.modal-content-edit {
+	background-color: #5a649c !important;
+}
+
+.day-number-admin {
+	background-color: #14294F;
+	height: 40px;
+	line-height: 40px;
+	color: white;
+	border-right: 1px solid;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: "Yu Gothic", sans-serif;
+}
+
+#table-body .row {
+	width: 100%;
+	margin-right: 0;
+	margin-left: 0;
+}
+
+#table-body .row .col-admin {
+	padding: 0.1em !important;
+	min-height: 400px;
+	max-width: calc(100% / 6);
+}
+
+#table-header .row .col-admin {
+	max-width: calc(100% / 6);
+}
+
+#table-header .row {
+	width: 100%;
+	margin-right: 0;
+	margin-left: 0;
+}
+
+#table-body .row .empty-day {
+	padding: 0.1em !important;
+	height: 400px;
+	max-width: calc(100% / 6);
+}
+
+#table-body .row .content .menu {
+	border-bottom: 1px solid #ADB7BE;
+	text-align: left;
+}
+
+#table-body .row .content .menu h5 {
+	font-size: 0.8rem;
+	color: #E65E39;
+}
+
+.bg-color {
+	background-color: #F0F5F2;
+}
